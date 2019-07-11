@@ -1,0 +1,11 @@
+#!/bin/sh
+
+source "$( dirname ${0} )/env.sh"
+
+eval $(minishift oc-env)
+
+OS_IP=`minishift ip`
+
+echo Using Minishift IP $OS_IP
+
+OC_PUBLIC_HOSTNAME=$OS_IP OC_PUBLIC_IP=$OS_IP ${CHEDIR}/deploy/openshift/deploy_che.sh $@

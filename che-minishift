@@ -1,0 +1,16 @@
+#!/bin/sh
+
+minishift start --memory 8GB --disk-size=40GB --docker-opt userland-proxy=false
+
+oc login -u system:admin --insecure-skip-tls-verify=true
+oc delete project myproject
+oc adm policy add-scc-to-group hostmount-anyuid system:serviceaccounts
+oc login --username=developer --password=any --insecure-skip-tls-verify=true
+oc delete project myproject
+
+minishift ssh "sudo yum install chrony -y"
+minishift ssh "sudo sed -i 's/makestep 1.0 3/makestep 1.0 -1/g' /etc/chrony.conf"
+minishift ssh "sudo sed -i 's/\#allow/allow/g' /etc/chrony.conf"
+minishift ssh "sudo systemctl enable chronyd"
+minishift ssh "sudo systemctl start chronyd"
+minishift ssh "sudo systemctl status chronyd"
