@@ -1,1 +1,1 @@
-few scripts I'm using to help development of Eclipse Che
+few scripts to help with devel Eclipse Che
