@@ -1,0 +1,13 @@
+#!/bin/sh
+
+source "$( dirname ${0} )/env.sh"
+
+set -x
+
+minikube start --memory 6144 --disk-size 40g --extra-config=apiserver.authorization-mode=RBAC
+
+kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+kubectl create serviceaccount tiller --namespace kube-system
+kubectl apply -f ${CHEDIR}/deploy/kubernetes/helm/che/tiller-rbac.yaml
+helm init --service-account tiller --wait
+minikube addons enable ingress
