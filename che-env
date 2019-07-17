@@ -1,0 +1,14 @@
+#!/bin/bash
+
+VAR=$1
+
+if [ -z ${VAR} ]; then
+	echo "needs one argument"
+	exit 1
+fi
+
+VAR=${VAR//_/__}
+VAR=${VAR//./_}
+VAR=${VAR^^}
+
+echo ${VAR}
