@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -x
+
+kubectl scale deployment che --replicas 0 -n che
+sleep 3
+kubectl scale deployment che --replicas 1 -n che
