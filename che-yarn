@@ -1,0 +1,7 @@
+#!/bin/sh
+
+YARN_COMMAND=$@
+
+set -x
+docker run -i -t --rm -v ${PWD}:/home/node/project:z node:8-jessie \
+/bin/sh -c "cd /home/node/project && yarn ${YARN_COMMAND}"
