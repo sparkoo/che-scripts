@@ -1,0 +1,7 @@
+#!/bin/sh
+
+source "$( dirname ${0} )/env.sh"
+
+CHE_POD=`getKubeChePod`
+
+kubectl logs -f ${CHE_POD} -n che
