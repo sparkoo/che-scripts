@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-source "$( dirname ${0} )/env.sh"
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
 
-CHE_POD=getKubeChePod()
+CHE_POD=$(getKubeChePod)
 
-kubectl port-forward ${CHE_POD} 8000 --namespace che
+kubectl port-forward "${CHE_POD}" 8000 --namespace che
