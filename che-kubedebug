@@ -1,0 +1,7 @@
+#!/bin/sh
+
+source "$( dirname ${0} )/env.sh"
+
+CHE_POD=getKubeChePod()
+
+kubectl port-forward ${CHE_POD} 8000 --namespace che
