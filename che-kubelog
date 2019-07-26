@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-source "$( dirname ${0} )/env.sh"
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
 
-CHE_POD=`getKubeChePod`
+CHE_POD=$(getKubeChePod)
 
-kubectl logs -f ${CHE_POD} -n che
+kubectl logs -f "${CHE_POD}" -n che

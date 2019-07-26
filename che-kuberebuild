@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-source "$( dirname ${0} )/env.sh"
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
 
-pushd ${CHEDIR}/assembly
+pushd "${CHEDIR}"/assembly || exit
 mvn clean install
-popd
+popd || exit
 
-pushd ${CHEDIR}/dockerfiles/che
-eval $(minikube docker-env)
+pushd "${CHEDIR}"/dockerfiles/che || exit
+eval "$(minikube docker-env)"
 sh build.sh --tag:mvala --dockerfile:Dockerfile
-popd
+popd || exit
