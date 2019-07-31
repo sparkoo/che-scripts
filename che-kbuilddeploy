@@ -11,5 +11,5 @@ mvn clean install
 popd || exit
 
 sh "${SCRIPT_DIR}"/che-krebuild
-sh "${SCRIPT_DIR}"/che-kdelpoycustom
+sh "${SCRIPT_DIR}"/che-kdeploycustom
 sh "${SCRIPT_DIR}"/che-krestartpod
