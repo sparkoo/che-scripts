@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# shellcheck source=env.sh
+SCRIPT_DIR=$( dirname "${0}" )
+. "${SCRIPT_DIR}/env.sh"
+
+pushd "${CHEDIR}"/wsmaster || exit
+mvn clean install
+popd || exit
+
+sh "${SCRIPT_DIR}"/che-krebuild
+sh "${SCRIPT_DIR}"/che-kdelpoycustom
+sh "${SCRIPT_DIR}"/che-krestartpod
