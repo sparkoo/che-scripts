@@ -12,5 +12,5 @@ popd
 
 pushd ${CHEDIR}/dockerfiles/che
 eval $(minishift docker-env)
-./build.sh --dockerfile:Dockerfile
+./build.sh --dockerfile:Dockerfile --tag:mvala
 popd
