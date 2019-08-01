@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+URL=$( oc get routes | grep che- )
+# shellcheck disable=SC2086
+URL=$( echo ${URL} | cut -d' ' -f2 )
+
+echo "http://${URL}"
+echo "http://${URL}/swagger"
