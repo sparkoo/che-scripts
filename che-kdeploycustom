@@ -1,6 +1,7 @@
 #!/bin/sh
 
-source "$( dirname ${0} )/env.sh"
+# shellcheck source=./env.sh
+. "$( dirname "${0}" )/env.sh"
 
 set -x
 
@@ -8,4 +9,4 @@ helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
 --set cheImage=eclipse/che-server:mvala \
 --set global.cheWorkspaceNamespace=che \
-${CHEDIR}/deploy/kubernetes/helm/che
+"${CHEDIR}"/deploy/kubernetes/helm/che
