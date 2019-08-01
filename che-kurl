@@ -1,0 +1,8 @@
+#!/bin/bash
+
+URL=$( kubectl get ingresses -n che | grep che-ingress )
+# shellcheck disable=SC2086
+URL=$( echo ${URL} | cut -d' ' -f2 )
+
+echo "http://${URL}"
+echo "http://${URL}/swagger"
