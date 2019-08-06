@@ -4,7 +4,7 @@
 . "$( dirname "${0}" )/env.sh"
 
 pushd "${CHEDIR}"/assembly || exit
-mvn clean install
+mvn install
 popd || exit
 
 pushd "${CHEDIR}"/dockerfiles/che || exit
