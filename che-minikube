@@ -8,6 +8,7 @@ set -e
 
 minikube start --memory 6144 --disk-size 40g --extra-config=apiserver.authorization-mode=RBAC
 
+kubectl create namespace che
 kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
 kubectl create serviceaccount tiller --namespace kube-system
 kubectl apply -f "${CHEDIR}"/deploy/kubernetes/helm/che/tiller-rbac.yaml
