@@ -4,9 +4,8 @@
 . "$( dirname "${0}" )/env.sh"
 
 set -x
-set -e
 
-minikube start --memory 6144 --disk-size 40g --extra-config=apiserver.authorization-mode=RBAC
+minikube start --memory 6144 --disk-size 40g --extra-config=apiserver.authorization-mode=RBAC userland-proxy=false
 
 kubectl create namespace che
 kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
