@@ -1,0 +1,3 @@
+#!/bin/bash
+
+crc start --memory 10240
