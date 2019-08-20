@@ -1,1 +1,1 @@
-few scripts to help with devel Eclipse Che
+few scripts to support local development of Eclipse Che
