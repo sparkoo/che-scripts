@@ -5,7 +5,7 @@ set -e
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-pushd "${CHEDIR}"/infrastructure || exit
+pushd "${CHEDIR}"/infrastructures || exit
 mvn fmt:format
 mvn install -DskipTests
 popd || exit
