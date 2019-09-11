@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
+sh "${SCRIPT_DIR}"/che-buildwsmaster
+sh "${SCRIPT_DIR}"/che-orebuilddocker
+sh "${SCRIPT_DIR}"/che-odeploycustom
+#sh "${SCRIPT_DIR}"/che-orestartpod

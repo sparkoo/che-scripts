@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+pushd "${CHEDIR}"/assembly || exit
+mvn install
+popd || exit
+
+pushd "${CHEDIR}"/dockerfiles/che || exit
+eval "$(minishift docker-env)"
+sh build.sh --tag:mvala --dockerfile:Dockerfile
+popd || exit
