@@ -7,6 +7,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 . "${SCRIPT_DIR}/env.sh"
 
 sh "${SCRIPT_DIR}"/che-buildwsmaster
+sh "${SCRIPT_DIR}"/che-buildinfra
 sh "${SCRIPT_DIR}"/che-krebuilddocker
 sh "${SCRIPT_DIR}"/che-kdeploycustom
 sh "${SCRIPT_DIR}"/che-krestartpod
