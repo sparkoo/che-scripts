@@ -6,5 +6,6 @@ set -e
 . "$( dirname "${0}" )/env.sh"
 
 pushd "${CHEDIR}"/wsmaster || exit
+mvn fmt:format
 mvn install -DskipTests
 popd || exit
