@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+pushd "${CHEDIR}"/assembly || exit
+mvn install
+popd || exit
+
+pushd "${CHEDIR}"/dockerfiles/che || exit
+sh build.sh --tag:mvala --dockerfile:Dockerfile
+popd || exit
