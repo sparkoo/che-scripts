@@ -3,9 +3,15 @@
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
+if [[ -z ${1} ]]; then
+        MEMORY=6
+else
+        MEMORY=${1}
+fi
+
 set -x
 
-minikube start --memory 6144 --disk-size 40g --vm-driver=kvm2 --extra-config=apiserver.authorization-mode=RBAC userland-proxy=false
+minikube start --memory ${MEMORY}gb --disk-size 40g --vm-driver=kvm2 --extra-config=apiserver.authorization-mode=RBAC userland-proxy=false
 
 kubectl create namespace che
 kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
