@@ -11,3 +11,4 @@ sh "${SCRIPT_DIR}"/che-build wsmaster
 sh "${SCRIPT_DIR}"/che-krebuilddocker
 sh "${SCRIPT_DIR}"/che-kdeploycustom
 sh "${SCRIPT_DIR}"/che-krestartpod
+sh "${SCRIPT_DIR}"/che-kurl
