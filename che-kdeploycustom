@@ -8,5 +8,6 @@ set -x
 helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
 --set cheImage=quay.io/mvala/che-server:custom \
+--set cheImagePullPolicy=IfNotPresent \
 --set global.cheWorkspaceNamespace=che \
 "${CHEDIR}"/deploy/kubernetes/helm/che
