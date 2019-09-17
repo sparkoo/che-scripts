@@ -5,7 +5,12 @@ set -e
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-pushd "${CHEDIR}"/infrastructures || exit
+# shellcheck disable=SC2070
+if [ -n "${1}" ]; then
+  DIR=${1}
+fi
+
+pushd "${CHEDIR}"/"${DIR}" || exit
 mvn fmt:format
 mvn install -DskipTests
 popd || exit
