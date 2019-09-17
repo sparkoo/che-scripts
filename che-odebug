@@ -4,6 +4,6 @@ set -x
 
 PORT=${1:-8000}
 
-CHE_POD=$( oc get pods |  grep -P 'che-[0-9]+-(?!deploy)'| cut -d' ' -f1 )
+CHE_POD=$( oc get pods |  grep -P 'che-[0-9a-f]+'| cut -d' ' -f1 )
 echo Forwarding to pod "${CHE_POD}"
 oc port-forward "${CHE_POD}" "${PORT}":8000
