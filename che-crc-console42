@@ -1,0 +1,4 @@
+#!/bin/bash
+
+oc set image deployment/console -n openshift-console console=quay.io/openshift/origin-console:4.2
+oc apply -f https://raw.githubusercontent.com/openshift/console-operator/release-4.2/manifests/00-crd-extension-console-link.yaml
