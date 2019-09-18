@@ -5,4 +5,8 @@
 
 CHE_POD=$(getKubeChePod)
 
+kubectl get deployment che -n che -o yaml | \
+  sed -e "s/failureThreshold: 3/failureThreshold: 9999/" | \
+  kubectl apply -f -
+
 kubectl port-forward "${CHE_POD}" 8000 --namespace che
