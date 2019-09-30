@@ -16,4 +16,5 @@ OC_PUBLIC_HOSTNAME=$OS_IP OC_PUBLIC_IP=$OS_IP \
 --image-che=quay.io/mvala/che-server:custom \
 --no-pull \
 --debug \
+--multiuser \
 "${@}"
