@@ -13,6 +13,8 @@ echo Using Minishift IP "${OS_IP}"
 
 OC_PUBLIC_HOSTNAME=$OS_IP OC_PUBLIC_IP=$OS_IP \
 "${CHEDIR}"/deploy/openshift/deploy_che.sh \
+--deploy-che-plugin-registry \
+--deploy-che-devfile-registry \
 --image-che=quay.io/mvala/che-server:custom \
 --no-pull \
 --debug \

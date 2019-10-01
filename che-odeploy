@@ -9,4 +9,8 @@ OS_IP=$( minishift ip )
 
 echo Using Minishift IP "${OS_IP}"
 
-OC_PUBLIC_HOSTNAME=$OS_IP OC_PUBLIC_IP=$OS_IP "${CHEDIR}"/deploy/openshift/deploy_che.sh --debug $@
+OC_PUBLIC_HOSTNAME=$OS_IP OC_PUBLIC_IP=$OS_IP "${CHEDIR}"/deploy/openshift/deploy_che.sh \
+--debug \
+--deploy-che-plugin-registry \
+--deploy-che-devfile-registry \
+"${@}"
