@@ -12,4 +12,5 @@ sh "${SCRIPT_DIR}"/che-build wsmaster
 sh "${SCRIPT_DIR}"/che-build infrastructures
 sh "${SCRIPT_DIR}"/che-orebuilddocker
 sh "${SCRIPT_DIR}"/che-odeploycustom
+sh "${SCRIPT_DIR}"/che-orestartpod
 sh "${SCRIPT_DIR}"/che-ourl

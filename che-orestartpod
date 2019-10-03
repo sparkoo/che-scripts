@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -x
+
+oc scale dc che --replicas=0
+sleep 3
+oc scale dc che --replicas=1
