@@ -5,9 +5,12 @@
 
 set -x
 
+CHE_IMAGE=quay.io/mvala/che-server:custom
+#CHE_IMAGE=eclipse/che-server:nightly
+
 helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
---set cheImage=quay.io/mvala/che-server:custom \
+--set cheImage=${CHE_IMAGE} \
 --set cheImagePullPolicy=IfNotPresent \
 --set global.cheWorkspaceNamespace=che \
 --set global.multiuser=true \
