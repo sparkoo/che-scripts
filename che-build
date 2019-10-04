@@ -12,5 +12,5 @@ fi
 
 pushd "${CHEDIR}"/"${DIR}" || exit
 mvn fmt:format
-mvn install -DskipTests
+mvn install -DskipTests -T 1.5C
 popd || exit
