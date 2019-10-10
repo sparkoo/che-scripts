@@ -7,10 +7,13 @@ set -e
 
 # shellcheck disable=SC2070
 if [ -n "${1}" ]; then
-  DIR=${1}
+  TARGETS=${@}
 fi
 
-pushd "${CHEDIR}"/"${DIR}" || exit
-mvn fmt:format
-mvn install -DskipTests -T 1.5C
-popd || exit
+for TARGET in ${TARGETS}
+do
+  pushd "${CHEDIR}"/"${TARGET}" || exit
+  mvn fmt:format
+  mvn install -DskipTests -T 1.5C -Pnative
+  popd || exit
+done
