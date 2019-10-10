@@ -7,7 +7,9 @@ set -e
 
 # shellcheck disable=SC2070
 if [ -n "${1}" ]; then
-  TARGETS=${@}
+  TARGETS=${*}
+else
+  TARGETS=.
 fi
 
 for TARGET in ${TARGETS}
