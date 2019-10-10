@@ -19,6 +19,5 @@ if ! oc get projects | grep -q eclipse-che ; then
   --image-che=quay.io/mvala/che-server:custom \
   --no-pull \
   --debug \
-  --multiuser \
   "${@}"
 fi

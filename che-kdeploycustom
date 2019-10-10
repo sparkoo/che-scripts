@@ -13,5 +13,4 @@ helm upgrade --install che --namespace che \
 --set cheImage=${CHE_IMAGE} \
 --set cheImagePullPolicy=IfNotPresent \
 --set global.cheWorkspaceNamespace=che \
---set global.multiuser=true \
 "${CHEDIR}"/deploy/kubernetes/helm/che
