@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( dirname "${0}" )
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
+TAG=${1}
+IMAGE=quay.io/mvala/che-server
+SRC_IMAGE=${IMAGE}:custom
+DST_IMAGE=${IMAGE}:${TAG}
+
+set -x
+
+docker tag "${SRC_IMAGE}" "${DST_IMAGE}"
+docker push "${DST_IMAGE}"
