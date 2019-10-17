@@ -16,6 +16,6 @@ for TARGET in ${TARGETS}
 do
   pushd "${CHEDIR}"/"${TARGET}" || exit
   mvn fmt:format
-  mvn install -DskipTests -T 1.5C -Pnative
+  mvn install -DskipTests -T 1.5C
   popd || exit
 done
