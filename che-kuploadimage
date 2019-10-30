@@ -5,7 +5,7 @@
 
 # shellcheck disable=SC2070
 if [ -n "${1}" ]; then
-  IMAGE=${*}
+  IMAGE=${1}
 else
   IMAGE=quay.io/mvala/che-server:custom
 fi
