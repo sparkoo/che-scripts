@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+IMAGE=quay.io/mvala/che-operator:metrics
+
+pushd "${CHEOPERATORDIR}" || exit
+docker build -t "${IMAGE}" .
+docker push "${IMAGE}"
+popd
