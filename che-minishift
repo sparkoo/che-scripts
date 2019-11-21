@@ -9,6 +9,7 @@ fi
 minishift start --memory ${MEMORY}GB --disk-size=40GB --docker-opt userland-proxy=false
 
 oc login -u system:admin --insecure-skip-tls-verify=true
+oc adm policy add-cluster-role-to-user cluster-admin developer
 oc delete project myproject
 oc adm policy add-scc-to-group hostmount-anyuid system:serviceaccounts
 oc login --username=developer --password=any --insecure-skip-tls-verify=true
