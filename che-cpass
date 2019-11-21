@@ -1,0 +1,4 @@
+#!/bin/bash
+
+PASS=$( cat ~/.crc/cache/*/kubeadmin-password )
+echo "${PASS}"
