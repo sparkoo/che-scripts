@@ -5,7 +5,7 @@ set -e
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-IMAGE=quay.io/mvala/che-operator:metrics
+IMAGE=quay.io/mvala/che-operator:latest
 
 pushd "${CHEOPERATORDIR}" || exit
 docker build -t "${IMAGE}" .
