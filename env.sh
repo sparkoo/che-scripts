@@ -9,5 +9,5 @@ getKubeChePod() {
 }
 
 getOcChePod() {
-  oc get pods |  grep -P 'che-[0-9]*-[0-9a-z]*'| cut -d' ' -f1
+  oc get pods -n che |  grep -P 'che-[0-9a-f]*-[0-9a-z]*'| cut -d' ' -f1
 }

@@ -2,8 +2,12 @@
 
 set -x
 
+SCRIPT_DIR=$( dirname "${0}" )
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
 PORT=${1:-8000}
 
-CHE_POD=$( oc get pods |  grep -P 'che-[0-9]*-[0-9a-z]*'| cut -d' ' -f1 )
+CHE_POD=$( getOcChePod )
 echo Forwarding to pod "${CHE_POD}"
-oc port-forward "${CHE_POD}" "${PORT}":8000
+oc port-forward -n che "${CHE_POD}" "${PORT}":8000
