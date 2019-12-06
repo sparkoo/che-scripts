@@ -4,7 +4,14 @@ function getKubeadminPassword() {
   cat ~/.crc/cache/*/kubeadmin-password
 }
 
-crc start --memory 10240
+set -x
+
+sudo systemctl start libvirtd
+sleep 3
+crc start --memory 12288
+sleep 1
 eval $( crc oc-env )
+sleep 1
 oc login -u kubeadmin -p $( getKubeadminPassword ) https://api.crc.testing:6443
+sleep 1
 oc delete project openshift-monitoring
