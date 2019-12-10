@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
+
+oc login -u kubeadmin -p $( "${SCRIPT_DIR}"/che-cpass ) https://api.crc.testing:6443
