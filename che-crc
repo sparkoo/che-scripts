@@ -8,7 +8,7 @@ set -x
 
 sudo systemctl start libvirtd
 sleep 3
-crc start --memory 12288
+crc start --memory 12288 --pull-secret-file ~/.crc/pull-secret
 sleep 1
 eval $( crc oc-env )
 sleep 1
