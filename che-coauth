@@ -3,4 +3,4 @@
 SCRIPT_DIR=$( dirname "${0}" )
 
 oc delete secret htpass-secret -n openshift-config
-oc create secret generic htpass-secret --from-file=htpasswd="${SCRIPT_DIR}"users.htpasswd -n openshift-config
+oc create secret generic htpass-secret --from-file=htpasswd="${SCRIPT_DIR}"/users.htpasswd -n openshift-config

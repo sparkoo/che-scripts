@@ -2,7 +2,7 @@
 
 set -e
 
-URL=$( kubectl get ingresses -n che | grep che-ingress )
+URL=$( kubectl get ingresses -n che | grep ^che )
 # shellcheck disable=SC2086
 URL=$( echo ${URL} | cut -d' ' -f2 )
 

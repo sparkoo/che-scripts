@@ -11,7 +11,7 @@ pushd "${CHEDIR}"/assembly
 mvn clean install
 popd
 
-pushd ${CHEDIR}/dockerfiles/che
+pushd "${CHEDIR}"/dockerfiles/che
 eval $(minishift docker-env)
 ./build.sh --dockerfile:Dockerfile --tag:mvala
 popd

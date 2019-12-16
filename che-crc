@@ -9,6 +9,7 @@ set -x
 sudo systemctl start libvirtd
 sleep 1
 crc start --memory 12288 --pull-secret-file ~/.crc/pull-secret
+sleep 3
 eval $( crc oc-env )
 sleep 3
 oc login -u kubeadmin -p $( getKubeadminPassword ) https://api.crc.testing:6443
