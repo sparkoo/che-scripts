@@ -19,3 +19,4 @@ kubectl create namespace che
 #kubectl apply -f "${CHEDIR}"/deploy/kubernetes/helm/che/tiller-rbac.yaml
 #helm init --service-account tiller --wait
 minikube addons enable ingress
+minikube ip
