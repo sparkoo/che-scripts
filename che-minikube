@@ -4,9 +4,9 @@
 . "$( dirname "${0}" )/env.sh"
 
 if [ -z "${1}" ]; then
-        MEMORY=6
+  MEMORY=6
 else
-        MEMORY=${1}
+  MEMORY=${1}
 fi
 
 set -x
