@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -x
+set -e
+
+KEYCLOAK_URL=$( oc get route/keycloak -n che -o jsonpath='{.spec.host}' )
+
+curl -X POST ${KEYCLOAK_URL}/auth/realms/che/protocol/openid-connect/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "username=admin" \
+  -d "password=admin" \
+  -d "grant_type=password" \
+  -d "client_id=che-public" | jq -r .access_token
