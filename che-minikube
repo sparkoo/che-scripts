@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
@@ -12,6 +14,9 @@ fi
 set -x
 
 minikube start --memory "${MEMORY}"gb --disk-size 40g
+
+# fix internal networking issue
+minikube ssh -- sudo ip link set docker0 promisc on
 
 kubectl create namespace che
 #kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
