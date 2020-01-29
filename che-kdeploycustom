@@ -8,6 +8,8 @@ set -x
 CHE_IMAGE=quay.io/mvala/che-server:custom
 #CHE_IMAGE=eclipse/che-server:nightly
 
+helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
+
 helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
 --set cheImage=${CHE_IMAGE} \
