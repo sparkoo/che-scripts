@@ -10,4 +10,4 @@ else
   IMAGE=quay.io/mvala/che-server:custom
 fi
 
-docker save "${IMAGE}" | ssh -i $( minikube ssh-key ) -o StrictHostKeyChecking=no docker@$(minikube ip) "docker load"
+docker save "${IMAGE}" | ssh -i "$( minikube ssh-key )" -o StrictHostKeyChecking=no docker@"$( minikube ip )" "docker load"
