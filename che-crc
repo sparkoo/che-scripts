@@ -5,6 +5,7 @@ function getKubeadminPassword() {
 }
 
 set -x
+set -e
 
 sudo systemctl start libvirtd
 sleep 1
