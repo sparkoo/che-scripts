@@ -2,7 +2,7 @@
 
 VAR=$1
 
-if [ -z ${VAR} ]; then
+if [ -z "${VAR}" ]; then
 	echo "needs one argument"
 	exit 1
 fi

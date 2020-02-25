@@ -1,0 +1,20 @@
+#!/bin/sh
+
+SCRIPT_DIR=$( dirname "${0}" )
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
+# plugin registry
+NAMESPACE="che"
+kubectl create namespace che
+DOMAIN="$(minikube ip).nip.io"
+helm upgrade --install che-plugin-registry \
+    --debug \
+    --namespace ${NAMESPACE} \
+    --set global.ingressDomain="${DOMAIN}" \
+    "${CHEPLUGINREGISTRYDIR}"/deploy/kubernetes/che-plugin-registry/
+
+# ws namespace
+kubectl create namespace che-che
+docker pull quay.io/eclipse/che-plugin-metadata-broker:v3.1.0
+sh "${SCRIPT_DIR}"/che-kuploadimage quay.io/eclipse/che-plugin-metadata-broker:v3.1.0

@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+
+if [ -z "${1}" ]; then
+  echo "needs namespace argument to switch to - \`kc-namespace <namespace>\`"
+  exit 1
+fi
+
+NAMESPACE=${1}
+
+CURRENT_CONTEXT=$(kubectl config current-context)
+kubectl config set-context "${CURRENT_CONTEXT}" --namespace="${NAMESPACE}"
+echo "using [${NAMESPACE}] in [${CURRENT_CONTEXT}]"
