@@ -3,6 +3,7 @@
 # shellcheck disable=SC2034
 CHEDIR=/home/mvala/dev/che
 CHEPLUGINREGISTRYDIR=/home/mvala/dev/che-plugin-registry
+CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
 CHEOPERATORDIR=/home/mvala/dev/go/src/github.com/eclipse/che-operator
 
 getKubeChePod() {

@@ -8,11 +8,18 @@ SCRIPT_DIR=$( dirname "${0}" )
 NAMESPACE="che"
 kubectl create namespace che
 DOMAIN="$(minikube ip).nip.io"
+
 helm upgrade --install che-plugin-registry \
     --debug \
     --namespace ${NAMESPACE} \
     --set global.ingressDomain="${DOMAIN}" \
     "${CHEPLUGINREGISTRYDIR}"/deploy/kubernetes/che-plugin-registry/
+
+helm upgrade --install che-devfile-registry \
+    --debug \
+    --namespace ${NAMESPACE} \
+    --set global.ingressDomain="${DOMAIN}" \
+    "${CHEDEVFILEREGISTRYDIR}"/deploy/kubernetes/che-devfile-registry/
 
 # ws namespace
 kubectl create namespace che-che
