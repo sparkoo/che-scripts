@@ -1,0 +1,88 @@
+diff --git a/assembly/assembly-wsmaster-war/src/main/webapp/WEB-INF/classes/che/che.properties b/assembly/assembly-wsmaster-war/src/main/webapp/WEB-INF/classes/che/che.properties
+index 709aa39598..f6dc59ae58 100644
+--- a/assembly/assembly-wsmaster-war/src/main/webapp/WEB-INF/classes/che/che.properties
++++ b/assembly/assembly-wsmaster-war/src/main/webapp/WEB-INF/classes/che/che.properties
+@@ -118,7 +118,7 @@ che.workspace.sidecar.default_cpu_request_cores=0.115
+ # Possible values are: Always, Never, IfNotPresent. Any other value
+ # will be interpreted as unspecified policy (Always if :latest tag is specified,
+ # or IfNotPresent otherwise.)
+-che.workspace.sidecar.image_pull_policy=Always
++che.workspace.sidecar.image_pull_policy=IfNotPresent
+ 
+ 
+ # Period of inactive workspaces suspend job execution.
+@@ -232,18 +232,18 @@ che.infra.kubernetes.trust_certs=
+ 
+ # Defines the way how servers are exposed to the world in k8s infra.
+ # List of  strategies implemented in Che: default-host, multi-host, single-host
+-che.infra.kubernetes.server_strategy=default-host
++che.infra.kubernetes.server_strategy=multi-host
+ 
+ # Used to generate domain for a server in a workspace in case property `che.infra.kubernetes.server_strategy` is set to `multi-host`
+-che.infra.kubernetes.ingress.domain=
+ 
++che.infra.kubernetes.ingress.domain=192.168.39.42.nip.io
+ # DEPRECATED - please do not change the value of this property otherwise the existing workspaces will loose data. Do not
+ # set it on new installations.
+ #
+ # Defines Kubernetes namespace in which all workspaces will be created.
+ # If not set, every workspace will be created in a new namespace, where namespace = workspace id
+ # It's possible to use <username> and <userid> placeholders (e.g.: che-workspace-<username>).
+-# In that case, new namespace will be created for each user. Service account with permission
++# In that case, new `namespace will be created for each user. Service account with permission
+ # to create new namespace must be used.
+ #
+ # Ignored for OpenShift infra. Use `che.infra.openshift.project` instead
+@@ -497,7 +497,7 @@ che.workspace.plugin_broker.artifacts.image=quay.io/eclipse/che-plugin-artifacts
+ 
+ # Docker image of Che plugin broker app that resolves workspace tooling configuration and copies
+ # plugins dependencies to a workspace
+-che.workspace.plugin_broker.pull_policy=Always
++che.workspace.plugin_broker.pull_policy=IfNotPresent
+ 
+ # Defines the timeout in minutes that limits the max period of result waiting for plugin broker.
+ che.workspace.plugin_broker.wait_timeout_min=3
+@@ -505,12 +505,12 @@ che.workspace.plugin_broker.wait_timeout_min=3
+ # Workspace tooling plugins registry endpoint. Should be a valid HTTP URL.
+ # Example: http://che-plugin-registry-eclipse-che.192.168.65.2.nip.io
+ # In case Che plugins tooling is not needed value 'NULL' should be used
+-che.workspace.plugin_registry_url=https://che-plugin-registry.prod-preview.openshift.io/v3
++che.workspace.plugin_registry_url=http://che-plugin-registry-che.192.168.39.42.nip.io/v3/
+ 
+ # Devfile Registry endpoint. Should be a valid HTTP URL.
+ # Example: http://che-devfile-registry-eclipse-che.192.168.65.2.nip.io
+ # In case Che plugins tooling is not needed value 'NULL' should be used
+-che.workspace.devfile_registry_url=https://che-devfile-registry.prod-preview.openshift.io/
++che.workspace.devfile_registry_url=http://che-devfile-registry-che.192.168.39.42.nip.io/
+ 
+ # Defines a default value for persist volumes that clients like Dashboard
+ # should propose for users during workspace creation.
+diff --git a/core/che-core-api-core/src/main/java/org/eclipse/che/api/core/rest/ApiInfoProvider.java b/core/che-core-api-core/src/main/java/org/eclipse/che/api/core/rest/ApiInfoProvider.java
+index e512b87f31..7629ea53b1 100644
+--- a/core/che-core-api-core/src/main/java/org/eclipse/che/api/core/rest/ApiInfoProvider.java
++++ b/core/che-core-api-core/src/main/java/org/eclipse/che/api/core/rest/ApiInfoProvider.java
+@@ -12,7 +12,6 @@
+ package org.eclipse.che.api.core.rest;
+ 
+ import java.io.InputStream;
+-import java.net.URL;
+ import java.util.jar.Attributes;
+ import java.util.jar.Manifest;
+ import javax.inject.Inject;
+@@ -48,14 +47,8 @@ public class ApiInfoProvider implements Provider<ApiInfo> {
+ 
+   private ApiInfo readApiInfo(String buildInfo) {
+     try {
+-      // calculate path to MANIFEST.MF in the jar with ApiInfo.class
+-      Class clazz = ApiInfo.class;
+-      String classPath = clazz.getResource(clazz.getSimpleName() + ".class").toString();
+-
+-      String manifestPath =
+-          classPath.substring(0, classPath.lastIndexOf("!") + 1) + "/META-INF/MANIFEST.MF";
+-
+-      try (InputStream manifestInputStream = new URL(manifestPath).openStream()) {
++      try (InputStream manifestInputStream =
++          ApiInfoProvider.class.getResourceAsStream("/META-INF/MANIFEST.MF")) {
+ 
+         final Manifest manifest = new Manifest(manifestInputStream);
+         final Attributes mainAttributes = manifest.getMainAttributes();
