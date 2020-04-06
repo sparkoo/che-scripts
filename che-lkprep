@@ -23,5 +23,7 @@ helm upgrade --install che-devfile-registry \
 
 # ws namespace
 kubectl create namespace che-che
+kubectl apply -f ${SCRIPT_DIR}/checheDefaultRole.yaml -n che-che
+
 docker pull quay.io/eclipse/che-plugin-metadata-broker:v3.1.0
 sh "${SCRIPT_DIR}"/che-kuploadimage quay.io/eclipse/che-plugin-metadata-broker:v3.1.0
