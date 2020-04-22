@@ -1,4 +1,0 @@
-#!/bin/bash
-
-oc create secret tls router-certs --cert=$( dirname "${0}" )/crc.crt --key=$( dirname "${0}" )/domain.key -n openshift-ingress
-oc patch ingresscontroller default -n openshift-ingress-operator --type=merge --patch='{"spec": { "defaultCertificate": { "name": "router-certs" }}}'

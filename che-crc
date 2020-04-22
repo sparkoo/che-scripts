@@ -24,3 +24,8 @@ eval $( crc oc-env )
 sleep 3
 oc login -u kubeadmin -p $( getKubeadminPassword ) https://api.crc.testing:6443
 oc delete project openshift-monitoring
+
+oc create namespace che
+. "$( dirname "${0}" )"/che-ctls
+
+echo "import '/tmp/ca.crt' into your browser"
