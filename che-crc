@@ -24,6 +24,10 @@ eval $( crc oc-env )
 sleep 3
 oc login -u kubeadmin -p $( getKubeadminPassword ) https://api.crc.testing:6443
 oc delete project openshift-monitoring
+oc delete project openshift-console
+oc delete project openshift-console-operator
+
+set +e
 
 oc create namespace che
 . "$( dirname "${0}" )"/che-ctls

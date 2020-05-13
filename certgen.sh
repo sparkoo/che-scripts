@@ -35,12 +35,12 @@ function certgen {
     -out domain.csr
 
   openssl x509 \
-  -req \
-  -sha256 \
-  -extfile <(printf "subjectAltName=DNS:${DOMAIN}\nbasicConstraints=critical, CA:FALSE\nkeyUsage=keyCertSign, digitalSignature, keyEncipherment\nextendedKeyUsage=serverAuth") \
-  -days 365 \
-  -in domain.csr \
-  -CA rootCA.crt \
-  -CAkey rootCA.key \
-  -CAcreateserial -out domain.crt
+    -req \
+    -sha256 \
+    -extfile <(printf "subjectAltName=DNS:${DOMAIN}\nbasicConstraints=critical, CA:FALSE\nkeyUsage=keyCertSign, digitalSignature, keyEncipherment\nextendedKeyUsage=serverAuth") \
+    -days 365 \
+    -in domain.csr \
+    -CA rootCA.crt \
+    -CAkey rootCA.key \
+    -CAcreateserial -out domain.crt
 }

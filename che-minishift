@@ -21,3 +21,7 @@ minishift ssh "sudo sed -i 's/\#allow/allow/g' /etc/chrony.conf"
 minishift ssh "sudo systemctl enable chronyd"
 minishift ssh "sudo systemctl start chronyd"
 minishift ssh "sudo systemctl status chronyd"
+
+oc login -u system:admin --insecure-skip-tls-verify=true
+oc create namespace che
+. "$( dirname "${0}" )"/che-otls

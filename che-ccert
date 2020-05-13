@@ -1,0 +1,25 @@
+#!/bin/bash
+
+. "$( dirname "${0}" )/certgen.sh"
+DOMAIN="apps-crc.testing"
+
+
+CERT_DIR="/tmp/cert-$( minishift ip ).nip.io"
+mkdir -p "${CERT_DIR}"
+
+pushd ${CERT_DIR}
+
+certgen ${DOMAIN}
+
+oc login -u system:admin --insecure-skip-tls-verify=true
+oc project default
+oc delete secret router-certs
+cat domain.crt domain.key > minishift.crt
+oc create secret tls router-certs --key=domain.key --cert=minishift.crt
+oc rollout latest router
+
+oc create namespace che
+cp rootCA.crt ca.crt
+oc create secret generic self-signed-certificate --from-file=ca.crt -n=che
+
+popd

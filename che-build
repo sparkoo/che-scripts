@@ -12,6 +12,8 @@ else
   TARGETS=.
 fi
 
+set -x
+
 for TARGET in ${TARGETS}
 do
   pushd "${CHEDIR}"/"${TARGET}" || exit

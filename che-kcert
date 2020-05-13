@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -x
+
+. "$( dirname "${0}" )/certgen.sh"
+DOMAIN="*.$( minikube ip ).nip.io"
+
+
+CERT_DIR="/tmp/cert-$( minikube ip ).nip.io"
+mkdir -p "${CERT_DIR}"
+
+pushd ${CERT_DIR}
+
+certgen ${DOMAIN}
+cp rootCA.crt ca.crt
+kubectl create namespace che
+kubectl create secret tls che-tls --key=domain.key --cert=domain.crt -n che
+kubectl create secret generic self-signed-certificate --from-file=ca.crt -n che
+
+popd

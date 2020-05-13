@@ -1,10 +1,12 @@
 #!/bin/bash
 
+set -x
+
 . "$( dirname "${0}" )/certgen.sh"
 DOMAIN="*.$( minishift ip ).nip.io"
 
 
-CERT_DIR="/tmp/cert-$( minishift ip ).nip.io"
+CERT_DIR="/tmp/minishift-cert-$( minishift ip ).nip.io"
 mkdir -p "${CERT_DIR}"
 
 pushd ${CERT_DIR}
@@ -21,5 +23,7 @@ oc rollout latest router
 oc create namespace che
 cp rootCA.crt ca.crt
 oc create secret generic self-signed-certificate --from-file=ca.crt -n=che
+
+echo "import '${PWD}/rootCA.crt' into your browser"
 
 popd
