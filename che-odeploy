@@ -1,16 +1,16 @@
 #!/bin/sh
 
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
+
 # shellcheck source=env.sh
-. "$( dirname "${0}" )/env.sh"
+. "${SCRIPT_DIR}/env.sh"
 
-eval $(minishift oc-env)
 
-OS_IP=$( minishift ip )
+CHE_IMAGE=${1:-quay.io/eclipse/che-server}
+CHE_IMAGE_TAG=${2:-nightly}
 
-echo Using Minishift IP "${OS_IP}"
+sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
-OC_PUBLIC_HOSTNAME=$OS_IP OC_PUBLIC_IP=$OS_IP "${CHEDIR}"/deploy/openshift/deploy_che.sh \
---debug \
---deploy-che-plugin-registry \
---deploy-che-devfile-registry \
-"${@}"
+chectl server:start --platform=minishift --installer=operator --che-operator-cr-yaml=/tmp/che_cr.yaml
