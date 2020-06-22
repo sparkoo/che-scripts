@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
-. "$( dirname "${0}" )/env.sh"
+. "${SCRIPT_DIR}/env.sh"
 
-CHE_POD=$(getKubeChePod)
+PORT=${1:-8000}
 
-kubectl get deployment che -n che -o yaml | \
-  sed -e "s/failureThreshold: 3/failureThreshold: 9999/" | \
-  kubectl apply -f -
-
-kubectl port-forward "${CHE_POD}" 8000 --namespace che
+CHE_POD=$( getOcChePod )
+echo Forwarding to pod "${CHE_POD}"
+kc port-forward -n che "${CHE_POD}" "${PORT}":8000

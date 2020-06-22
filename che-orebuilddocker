@@ -3,5 +3,5 @@
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-eval "$( minishift docker-env )"
 . "$( dirname "${0}" )"/che-rebuilddocker
+. "$( dirname "${0}" )"/che-ouploadimage

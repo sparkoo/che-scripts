@@ -2,6 +2,6 @@
 
 set -x
 
-oc scale dc che --replicas=0
-sleep 3
-oc scale dc che --replicas=1
+oc scale deployment che --replicas=0
+sleep 5
+oc scale deployment che --replicas=1

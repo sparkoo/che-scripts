@@ -2,4 +2,6 @@
 
 set -x
 
-kc rollout restart deployment/che -n che
+kc scale deployment che --replicas=0
+sleep 5
+kc scale deployment che --replicas=1
