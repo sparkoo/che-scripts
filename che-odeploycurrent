@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
+
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
+
+CHE_IMAGE=quay.io/mvala/che-server
+CHE_IMAGE_TAG=$( getCurrentBranch )
+
+. "${SCRIPT_DIR}/che-odeploy" ${CHE_IMAGE} ${CHE_IMAGE_TAG}

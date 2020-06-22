@@ -5,11 +5,12 @@
 
 set -x
 
+TAG=$( getCurrentBranch )
 # shellcheck disable=SC2070
 if [ -n "${1}" ]; then
   IMAGE=${1}
 else
-  IMAGE=quay.io/mvala/che-server:custom
+  IMAGE=quay.io/mvala/che-server:${TAG}
 fi
 
 docker save "${IMAGE}" | ssh -i "$( minikube ssh-key )" -o StrictHostKeyChecking=no docker@"$( minikube ip )" "docker load"

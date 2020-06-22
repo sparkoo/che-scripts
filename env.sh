@@ -13,3 +13,7 @@ getKubeChePod() {
 getOcChePod() {
   oc get pods -n che |  grep -P 'che-[0-9a-f]*-[0-9a-z]*'| cut -d' ' -f1
 }
+
+getCurrentBranch() {
+  cat ${CHEDIR}/.git/HEAD | cut -d'/' -f3
+}
