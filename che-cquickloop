@@ -6,7 +6,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
 . "${SCRIPT_DIR}/env.sh"
 
-sh "${SCRIPT_DIR}"/che-build core wsmaster infrastructures
+sh "${SCRIPT_DIR}"/che-buildq
 sh "${SCRIPT_DIR}"/che-rebuilddocker
 sh "${SCRIPT_DIR}"/che-dtagpush custom
 sh "${SCRIPT_DIR}"/che-ckillpod

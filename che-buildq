@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+# shellcheck disable=SC2070
+if [ -n "${1}" ]; then
+  TARGETS=${*}
+else
+  TARGETS=.
+fi
+
+set -x
+
+for TARGET in ${TARGETS}
+do
+  pushd "${CHEDIR}"/"${TARGET}" || exit
+  mvn install -DskipTests -T 1.5C -Dfmt.skip=true -Dlicense.skip=true
+  popd || exit
+done
