@@ -7,7 +7,7 @@ CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
 CHEOPERATORDIR=/home/mvala/dev/go/src/github.com/eclipse/che-operator
 
 getKubeChePod() {
-	kubectl get pods -n che | grep -P 'che-' | cut -d' ' -f1
+	kubectl get pods -n che | grep -P 'che-' | grep -v 'operator' | grep 'Running' | cut -d' ' -f1
 }
 
 getOcChePod() {

@@ -13,7 +13,7 @@ fi
 
 set -x
 
-minikube start --memory "${MEMORY}"gb --disk-size 40g --driver='kvm2' --kubernetes-version='1.17.6'
+minikube start --memory "${MEMORY}"gb --disk-size 40g --driver='kvm2'
 
 # fix internal networking issue
 #minikube ssh -- sudo ip link set docker0 promisc on

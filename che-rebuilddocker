@@ -1,4 +1,4 @@
-1#!/bin/bash
+#!/bin/bash
 
 SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
@@ -6,7 +6,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 
 TAG=$( getCurrentBranch )
 
-sh "${SCRIPT_DIR}"/che-build assembly
+sh "${SCRIPT_DIR}"/che-buildq assembly
 
 pushd "${CHEDIR}"/dockerfiles/che || exit
 sh -x build.sh --organization:quay.io/mvala --prefix:che --name:server --tag:${TAG} --dockerfile:Dockerfile

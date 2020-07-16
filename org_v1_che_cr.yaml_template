@@ -67,7 +67,7 @@ spec:
   database:
     # when set to true, the operator skips deploying Postgres, and passes connection details of existing DB to Che server
     # otherwise a Postgres deployment is created
-    externalDb: false
+    externalDb: true
     # Postgres Database hostname that Che server uses to connect to. Defaults to postgres
     chePostgresHostName: ''
     # Postgres Database port that Che server uses to connect to. Defaults to 5432
@@ -97,7 +97,7 @@ spec:
 
   auth:
     # instructs operator on whether or not to deploy Keycloak/RH SSO instance. When set to true provision connection details
-    externalIdentityProvider: false
+    externalIdentityProvider: true
     # retrieved from respective route/ingress unless explicitly specified in CR (when ExternalKeycloak is true)
     identityProviderURL: ''
     # desired admin username of Keycloak admin user (applicable only when externalIdentityProvider is false)
@@ -117,6 +117,11 @@ spec:
     oAuthSecret: ''
     # image:tag used in Keycloak deployment
     identityProviderImage: ''
+    externalDevfileRegistry: true
+    devfileRegistryUrl: https://che-devfile-registry.prod-preview.openshift.io/
+    externalPluginRegistry: true
+    pluginRegistryUrl: https://che-plugin-registry.prod-preview.openshift.io/v3
+
   k8s:
     # your global ingress domain
     ingressDomain: '{{K8S_IP}}.nip.io'

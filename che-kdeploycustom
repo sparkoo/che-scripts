@@ -5,7 +5,8 @@
 
 set -x
 
-CHE_IMAGE=quay.io/mvala/che-server:custom
+CHE_IMAGE_TAG=$( getCurrentBranch )
+CHE_IMAGE=quay.io/mvala/che-server:${CHE_IMAGE_TAG}
 #CHE_IMAGE=eclipse/che-server:nightly
 
 helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
