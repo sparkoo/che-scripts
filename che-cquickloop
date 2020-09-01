@@ -6,7 +6,10 @@ SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
 . "${SCRIPT_DIR}/env.sh"
 
-sh "${SCRIPT_DIR}"/che-buildq
-sh "${SCRIPT_DIR}"/che-rebuilddocker
-sh "${SCRIPT_DIR}"/che-dtagpush custom
-sh "${SCRIPT_DIR}"/che-ckillpod
+sh "${SCRIPT_DIR}"/che-buildq "${*}"
+
+kc scale deployment che --replicas=0 -n che
+sh "${SCRIPT_DIR}"/che-crebuilddocker
+kc scale deployment che --replicas=1 -n che
+
+#sh "${SCRIPT_DIR}"/che-ckillpod

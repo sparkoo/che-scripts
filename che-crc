@@ -29,6 +29,8 @@ oc delete project openshift-console-operator
 
 set +e
 
+
+. "$( dirname "${0}" )"/che-clogin
 oc create namespace che
 . "$( dirname "${0}" )"/che-ctls
 

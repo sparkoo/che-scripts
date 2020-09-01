@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+set -x
+
+TAG=$( getCurrentBranch )
+# shellcheck disable=SC2070
+if [ -n "${1}" ]; then
+  IMAGE=${1}
+else
+  IMAGE=quay.io/mvala/che-server:${TAG}
+fi
+
+. "$( dirname "${0}" )/che-cloginadmin"
+
+oc create namespace che
+
+set -e
+. "$( dirname "${0}" )/che-clogin"
+
+NS=che
+REGISTRY=`oc registry info`
+INTERNAL_REGISTRY=`oc registry info --internal=true`
+IMAGE_NAME=$NS/che-server
+NEWTAG=$( date +%s )
+IMAGE=$IMAGE_NAME:$TAG
+
+docker login --tls-verify=false -u $( oc whoami ) -p $( oc whoami -t ) $REGISTRY
+docker tag quay.io/mvala/che-server:${TAG} $REGISTRY/$IMAGE
+docker push --tls-verify=false $REGISTRY/$IMAGE
+. "$( dirname "${0}" )/che-cloginadmin"
+#oc patch deployment/che --patch "{\"spec\":{\"server\":{\"cheImage\": \"$INTERNAL_REGISTRY/$IMAGE_NAME\", \"cheImageTag\":\"$NEWTAG\" }}}" --type=merge -n $NS
+#oc patch checluster/eclipse-che --patch "{\"spec\":{\"server\":{\"cheImage\": \"$INTERNAL_REGISTRY/$IMAGE_NAME\", \"cheImageTag\":\"$NEWTAG\" }}}" --type=merge -n $NS
