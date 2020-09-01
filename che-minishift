@@ -24,4 +24,4 @@ minishift ssh "sudo systemctl status chronyd"
 
 oc login -u system:admin --insecure-skip-tls-verify=true
 oc create namespace che
-. "$( dirname "${0}" )"/che-otls
+#. "$( dirname "${0}" )"/che-otls

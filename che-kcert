@@ -3,7 +3,7 @@
 set -x
 
 . "$( dirname "${0}" )/certgen.sh"
-DOMAIN="*.$( minikube ip ).nip.io"
+DOMAIN="$( minikube ip ).nip.io"
 
 
 CERT_DIR="/tmp/cert-$( minikube ip ).nip.io"
