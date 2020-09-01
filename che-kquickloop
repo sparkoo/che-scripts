@@ -7,6 +7,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 . "${SCRIPT_DIR}/env.sh"
 
 sh "${SCRIPT_DIR}"/che-buildq "${*}"
+kc scale deployment che --replicas=0 -n che
 sh "${SCRIPT_DIR}"/che-krebuilddocker
-sh "${SCRIPT_DIR}"/che-krestartpod
+kc scale deployment che --replicas=1 -n che
 sh "${SCRIPT_DIR}"/che-kurl
