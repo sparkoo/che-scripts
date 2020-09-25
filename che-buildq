@@ -17,6 +17,6 @@ set -x
 for TARGET in ${TARGETS}
 do
   pushd "${CHEDIR}"/"${TARGET}" || exit
-  mvn install -DskipTests -T 1.5C -Dfmt.skip=true -Dlicense.skip=true
+  mvn install -T 1.5C -Pfast
   popd || exit
 done
