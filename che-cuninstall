@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -x
+
+oc delete CheCluster eclipse-che -n che
+oc delete deployment che-operator -n che
+sleep 5
+oc delete namespace che
+oc delete namespace che-developer
