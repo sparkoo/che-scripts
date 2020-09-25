@@ -5,19 +5,12 @@
 
 set -x
 
-CHE_IMAGE_TAG=${CHE_IMAGE_TAG:-$( getCurrentBranch )}
-CHE_IMAGE=${CHE_IMAGE:-quay.io/mvala/che-server:${CHE_IMAGE_TAG}}
-
 helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
-
-kubectl create namespace che
 
 helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
---set cheImage=${CHE_IMAGE} \
 --set cheImagePullPolicy=IfNotPresent \
 --set global.cheWorkspaceNamespace=che \
---set che.disableProbes=true \
---set che.logLevel=DEBUG \
+-f "${CHEDIR}"/deploy/kubernetes/helm/che/values/single-host-gateway.yaml \
 -f "${CHEDIR}"/deploy/kubernetes/helm/che/values/tls.yaml \
 "${CHEDIR}"/deploy/kubernetes/helm/che
