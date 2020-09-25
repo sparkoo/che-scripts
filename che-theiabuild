@@ -1,0 +1,18 @@
+# run from che-theia root dir
+
+#!/bin/bash
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+TAG=$( getCurrentBranch )
+IMAGE=${PRIVATE_DOCKERREGISTRY}/che-theia:${TAG}
+
+set -x
+
+pushd ${CHETHEIADIR}
+./build.sh --build-args:GITHUB_TOKEN=${GITHUB_TOKEN} --root-yarn-opts:--ignore-scripts --dockerfile:Dockerfile.alpine --skip-tests
+popd
+
+docker tag localhost/eclipse/che-theia:next ${IMAGE}
+echo ${IMAGE}
