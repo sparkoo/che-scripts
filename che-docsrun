@@ -1,0 +1,6 @@
+#/bin/bash
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+docker run --name che-docs -v ${CHEDOCSDIR}:/projects/che-docs:Z -p 4000:4000 -it --rm docker.io/antora/antora /bin/sh -c "cd /projects/che-docs && sh /projects/che-docs/tools/preview.sh"
