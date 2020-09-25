@@ -2,9 +2,13 @@
 
 # shellcheck disable=SC2034
 CHEDIR=/home/mvala/dev/che
+CHETHEIADIR=/home/mvala/dev/che-theia
+CHEDOCSDIR=/home/mvala/dev/che-docs
 CHEPLUGINREGISTRYDIR=/home/mvala/dev/che-plugin-registry
 CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
 CHEOPERATORDIR=/home/mvala/dev/go/src/github.com/eclipse/che-operator
+
+PRIVATE_DOCKERREGISTRY=quay.io/mvala
 
 getKubeChePod() {
 	kubectl get pods -n che | grep -P 'che-' | grep -v 'operator' | grep 'Running' | cut -d' ' -f1
