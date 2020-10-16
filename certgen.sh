@@ -21,8 +21,7 @@ function certgen {
     -subj /CN=${CA_CN} \
     -reqexts SAN \
     -extensions SAN \
-    -config <(cat ${OPENSSL_CNF} \
-        <(printf '[SAN]\nbasicConstraints=critical, CA:TRUE\nkeyUsage=keyCertSign, cRLSign, digitalSignature, keyEncipherment'))
+    -config <(cat ${OPENSSL_CNF} <(printf '[SAN]\nbasicConstraints=critical, CA:TRUE\nkeyUsage=keyCertSign, cRLSign, digitalSignature, keyEncipherment'))
 
   openssl genrsa -out domain.key 2048
 

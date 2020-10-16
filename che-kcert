@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -x
+set -e
 
-DOMAIN="*.$( minikube ip ).nip.io"
+DOMAIN="${DOMAIN:-*.$( minikube ip ).nip.io}"
 CERT_DIR="/tmp/cert-${DOMAIN/\*/_}"
 
 . "$( dirname "${0}" )/certgen.sh"

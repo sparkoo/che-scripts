@@ -6,24 +6,13 @@ spec:
   server:
     cheImage: '{{CHE_IMAGE}}'
     cheImageTag: '{{CHE_IMAGE_TAG}}'
-    workspaceNamespaceDefault: 'che-<username>'
-    allowUserDefinedWorkspaceNamespaces: false
-    cheImagePullPolicy: Always
+    cheImagePullPolicy: IfNotPresent
     cheLogLevel: 'DEBUG'
     cheDebug: 'true'
-    pluginRegistryUrl: 'https://che-che.apps-crc.testing/plugin-registry/v3'
-    devfileRegistryUrl: 'https://che-che.apps-crc.testing/devfile-registry'
+    serverExposureStrategy: 'single-host'
+    singleHostWorkspaceExposureType: 'gateway'
     customCheProperties:
-      CHE_MULTIUSER: "true"
       CHE_LIMITS_USER_WORKSPACES_RUN_COUNT: '-1'
-      CHE_INFRA_KUBERNETES_SINGLE__HOST_WORKSPACE_EXPOSURE: "gateway"
-      CHE_INFRA_KUBERNETES_SERVER__STRATEGY: "single-host"
-  database:
-    externalDb: false
-  auth:
-    externalIdentityProvider: false
-  k8s:
-    ingressDomain: 'che-che.apps-crc.testing'
-    ingressStrategy: 'single-host'
   metrics:
     enable: false
+'

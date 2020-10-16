@@ -1,14 +1,20 @@
 #!/bin/sh
 
+SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=./env.sh
-. "$( dirname "${0}" )/env.sh"
+. "${SCRIPT_DIR}/env.sh"
 
 set -x
+set -e
+
+DOMAIN="$( minikube ip ).nip.io" "${SCRIPT_DIR}"/che-kcert
 
 CHE_IMAGE_TAG=${CHE_IMAGE_TAG:-$( getCurrentBranch )}
 CHE_IMAGE=${CHE_IMAGE:-quay.io/mvala/che-server:${CHE_IMAGE_TAG}}
 
 helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
+
+set +e
 
 kubectl create namespace che
 
@@ -20,4 +26,5 @@ helm upgrade --install che --namespace che \
 --set che.disableProbes=true \
 --set che.logLevel=DEBUG \
 -f "${CHEDIR}"/deploy/kubernetes/helm/che/values/tls.yaml \
+-f "${CHEDIR}"/deploy/kubernetes/helm/che/values/single-host-gateway.yaml \
 "${CHEDIR}"/deploy/kubernetes/helm/che
