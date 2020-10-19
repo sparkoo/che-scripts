@@ -1,18 +1,11 @@
 #!/bin/bash
 
-function getKubeadminPassword() {
-  cat ~/.crc/cache/*/kubeadmin-password
-}
-
 set -e
 
-if [ -z "${1}" ]; then
-  MEMORY=12
-else
-  MEMORY=${1}
-fi
-
+MEMORY=${1:-12}
 let "MEMORY = MEMORY * 1024"
+
+echo "starting crc with ${MEMORY} MiB memory ..."
 
 set -x
 
@@ -22,7 +15,7 @@ crc start --memory ${MEMORY} --pull-secret-file ~/.crc/pull-secret
 sleep 3
 eval $( crc oc-env )
 sleep 3
-oc login -u kubeadmin -p $( getKubeadminPassword ) https://api.crc.testing:6443
+. "$( dirname "${0}" )"/che-cloginadmin
 
 set +e
 
