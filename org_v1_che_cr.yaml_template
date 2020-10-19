@@ -6,7 +6,7 @@ spec:
   server:
     cheImage: '{{CHE_IMAGE}}'
     cheImageTag: '{{CHE_IMAGE_TAG}}'
-    cheImagePullPolicy: IfNotPresent
+    cheImagePullPolicy: {{CHE_IMAGE_PULL_POLICY}}
     cheLogLevel: 'DEBUG'
     cheDebug: 'true'
     serverExposureStrategy: 'single-host'
@@ -15,4 +15,3 @@ spec:
       CHE_LIMITS_USER_WORKSPACES_RUN_COUNT: '-1'
   metrics:
     enable: false
-'

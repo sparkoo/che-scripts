@@ -11,6 +11,6 @@ SCRIPT_DIR=$( dirname "${0}" )
 CHE_IMAGE=${1:-quay.io/eclipse/che-server}
 CHE_IMAGE_TAG=${2:-nightly}
 
-sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
+sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g; s%{{CHE_IMAGE_PULL_POLICY}}%IfNotPresent%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
 chectl server:start --platform=crc --installer=operator --che-operator-cr-patch-yaml=/tmp/che_cr.yaml
