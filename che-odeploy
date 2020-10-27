@@ -13,4 +13,4 @@ CHE_IMAGE_TAG=${2:-nightly}
 
 sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g; s%{{CHE_IMAGE_PULL_POLICY}}%IfNotPresent%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
-chectl server:start --platform=minishift --installer=operator --che-operator-cr-patch-yaml=/tmp/che_cr.yaml
+chectl server:deploy --platform=minishift --installer=operator --che-operator-cr-patch-yaml=/tmp/che_cr.yaml
