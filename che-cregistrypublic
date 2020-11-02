@@ -1,0 +1,10 @@
+#!/bin/bash
+
+. "$( dirname "${0}" )"/che-cloginadmin
+
+if oc registry info --public; then
+  echo "openshift registry is public"
+else
+  oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
+  until oc registry info --public; do echo "registry still not published ..."; sleep 5; done
+fi

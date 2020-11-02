@@ -1,8 +1,12 @@
 #!/bin/bash
 
-set -x
+. "$( dirname "${0}" )/env.sh"
 
 SCRIPT_DIR=$( dirname "${0}" )
+USER=${OPENSHIFT_REGISTRY_USER}
+PASS=${OPENSHIFT_REGISTRY_PASS}
+CLUSTER_URL=${OPENSHIFT_CLUSTER_URL:-https://api.crc.testing:6443}
 
-#oc login -u kubeadmin -p $( "${SCRIPT_DIR}"/che-cpass ) https://api.crc.testing:6443
-oc login -u developer -p developer https://api.crc.testing:6443
+set -x
+oc login --insecure-skip-tls-verify=true -u ${USER} -p ${PASS} ${CLUSTER_URL}
+set +x

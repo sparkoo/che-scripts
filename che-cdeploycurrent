@@ -1,21 +1,15 @@
 #!/bin/sh
 
-set -x
-
 SCRIPT_DIR=$( dirname "${0}" )
 
 # shellcheck source=env.sh
 . "${SCRIPT_DIR}/env.sh"
 
-#. "${SCRIPT_DIR}/che-cuploadimage"
-
-
-NS=che
 INTERNAL_REGISTRY=`oc registry info --internal=true`
-CHE_IMAGE=${INTERNAL_REGISTRY}/${NS}/che-server
+CHE_IMAGE=${INTERNAL_REGISTRY}/${CHE_NAMESPACE}/che-server
 #CHE_IMAGE=quay.io/mvala/che-server
 CHE_IMAGE_TAG=$( getCurrentBranch )
 
 sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g; s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
-chectl server:deploy --platform=crc --installer=operator --chenamespace=${NS} --che-operator-cr-patch-yaml=/tmp/che_cr.yaml
+chectl server:deploy --platform=openshift --installer=operator --chenamespace=${CHE_NAMESPACE} --che-operator-cr-patch-yaml=/tmp/che_cr.yaml

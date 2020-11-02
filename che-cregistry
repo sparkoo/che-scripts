@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCRIPT_DIR=$( dirname "${0}" )
+
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/che-cregistrypublic"
+. "${SCRIPT_DIR}/che-cregistryrole"

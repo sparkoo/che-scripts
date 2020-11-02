@@ -1,16 +1,17 @@
 #!/bin/bash
 
+. "$( dirname "${0}" )"/env.sh
 . "$( dirname "${0}" )"/che-cloginadmin
 
 cat <<EOF | oc apply -f -
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: developer-registry
+  name: che-registry
 subjects:
   - kind: User
     apiGroup: rbac.authorization.k8s.io
-    name: developer
+    name: ${OPENSHIFT_REGISTRY_USER}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

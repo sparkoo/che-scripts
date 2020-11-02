@@ -15,15 +15,14 @@ fi
 
 . "$( dirname "${0}" )/che-cloginadmin"
 
-oc create namespace che
+oc create namespace ${CHE_NAMESPACE}
 
 set -e
 . "$( dirname "${0}" )/che-clogin"
 
-NS=che
-REGISTRY=`oc registry info`
+REGISTRY=`oc registry info --public`
 INTERNAL_REGISTRY=`oc registry info --internal=true`
-IMAGE_NAME=$NS/che-server
+IMAGE_NAME=${CHE_NAMESPACE}/che-server
 NEWTAG=$( date +%s )
 IMAGE=$IMAGE_NAME:$TAG
 
@@ -31,5 +30,3 @@ docker login --tls-verify=false -u $( oc whoami ) -p $( oc whoami -t ) $REGISTRY
 docker tag quay.io/mvala/che-server:${TAG} $REGISTRY/$IMAGE
 docker push --tls-verify=false $REGISTRY/$IMAGE
 . "$( dirname "${0}" )/che-cloginadmin"
-#oc patch deployment/che --patch "{\"spec\":{\"server\":{\"cheImage\": \"$INTERNAL_REGISTRY/$IMAGE_NAME\", \"cheImageTag\":\"$NEWTAG\" }}}" --type=merge -n $NS
-#oc patch checluster/eclipse-che --patch "{\"spec\":{\"server\":{\"cheImage\": \"$INTERNAL_REGISTRY/$IMAGE_NAME\", \"cheImageTag\":\"$NEWTAG\" }}}" --type=merge -n $NS

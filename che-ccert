@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. "$( dirname "${0}" )"/env.sh
+
 . "$( dirname "${0}" )/certgen.sh"
 DOMAIN="apps-crc.testing"
 
@@ -18,8 +20,8 @@ cat domain.crt domain.key > minishift.crt
 oc create secret tls router-certs --key=domain.key --cert=minishift.crt
 oc rollout latest router
 
-oc create namespace che
+oc create namespace ${CHE_NAMESPACE}
 cp rootCA.crt ca.crt
-oc create secret generic self-signed-certificate --from-file=ca.crt -n=che
+oc create secret generic self-signed-certificate --from-file=ca.crt -n=${CHE_NAMESPACE}
 
 popd
