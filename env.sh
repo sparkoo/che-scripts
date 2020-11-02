@@ -8,10 +8,25 @@ CHEPLUGINREGISTRYDIR=/home/mvala/dev/che-plugin-registry
 CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
 CHEOPERATORDIR=/home/mvala/dev/go/src/github.com/eclipse/che-operator
 
+CHE_NAMESPACE=che
+
 PRIVATE_DOCKERREGISTRY=quay.io/mvala
 
+OPENSHIFT_ADMIN_USER=kubeadmin
+OPENSHIFT_ADMIN_PASS=
+
+OPENSHIFT_REGISTRY_USER=developer
+OPENSHIFT_REGISTRY_PASS=developer
+
+OPENSHIFT_USER=developer
+OPENSHIFT_USER_PASS=developer
+
+if [ -f /tmp/env-openshift.sh ]; then
+  source /tmp/env-openshift.sh
+fi
+
 getKubeChePod() {
-	kubectl get pods -n che | grep -P 'che-' | grep -v 'operator' | grep 'Running' | cut -d' ' -f1
+	kubectl get pods -l=app=che,component=che -o name
 }
 
 getOcChePod() {
