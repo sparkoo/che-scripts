@@ -6,7 +6,7 @@ set -e
 . "$( dirname "${0}" )/env.sh"
 
 if [ -z "${1}" ]; then
-  MEMORY=6
+  MEMORY=8
 else
   MEMORY=${1}
 fi
