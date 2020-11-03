@@ -6,7 +6,7 @@ CHETHEIADIR=/home/mvala/dev/che-theia
 CHEDOCSDIR=/home/mvala/dev/che-docs
 CHEPLUGINREGISTRYDIR=/home/mvala/dev/che-plugin-registry
 CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
-CHEOPERATORDIR=/home/mvala/dev/go/src/github.com/eclipse/che-operator
+CHEOPERATORDIR=/home/mvala/dev/che-operator
 
 CHE_NAMESPACE=che
 
@@ -26,7 +26,7 @@ if [ -f /tmp/env-openshift.sh ]; then
 fi
 
 getKubeChePod() {
-	kubectl get pods -l=app=che,component=che -o name
+	kubectl get pods -l=app=che,component=che -o name -n ${CHE_NAMESPACE} --field-selector status.phase=Running
 }
 
 getOcChePod() {
@@ -35,4 +35,8 @@ getOcChePod() {
 
 getCurrentBranch() {
   cat ${CHEDIR}/.git/HEAD | cut -d'/' -f3
+}
+
+getCurrentCheopBranch() {
+  cat ${CHEOPERATORDIR}/.git/HEAD | cut -d'/' -f3
 }

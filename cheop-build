@@ -5,9 +5,11 @@ set -e
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-IMAGE=quay.io/mvala/che-operator:latest
+IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$(getCurrentCheopBranch)
 
 pushd "${CHEOPERATORDIR}" || exit
+set -x
 docker build -t "${IMAGE}" .
 docker push "${IMAGE}"
+set +x
 popd
