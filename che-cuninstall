@@ -1,9 +1,13 @@
 #!/bin/sh
 
+. "$( dirname "${0}" )"/env.sh
+
+. "$( dirname "${0}" )"/che-cloginadmin
+
 set -x
 
-oc delete CheCluster eclipse-che -n che
-oc delete deployment che-operator -n che
+oc delete CheCluster eclipse-che -n ${CHE_NAMESPACE}
+oc delete deployment che-operator -n ${CHE_NAMESPACE}
 sleep 5
-oc delete namespace che
+oc delete namespace ${CHE_NAMESPACE}
 oc delete namespace che-developer

@@ -20,3 +20,5 @@ do
   mvn install -T 1.5C -Pfast
   popd || exit
 done
+
+set +x
