@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# shellcheck disable=SC2034
+set +x
+
 CHEDIR=/home/mvala/dev/che
 CHETHEIADIR=/home/mvala/dev/che-theia
 CHEDOCSDIR=/home/mvala/dev/che-docs
@@ -14,7 +15,7 @@ PRIVATE_DOCKERREGISTRY=quay.io/mvala
 
 # openshift credentials for crc
 OPENSHIFT_ADMIN_USER=kubeadmin
-OPENSHIFT_ADMIN_PASS=$( "${SCRIPT_DIR}"/che-cpass )
+OPENSHIFT_ADMIN_PASS=$( $( dirname "${0}" )/che-cpass )
 
 OPENSHIFT_REGISTRY_USER=developer
 OPENSHIFT_REGISTRY_PASS=developer
@@ -29,18 +30,19 @@ if [ -f /tmp/env-openshift.sh ]; then
   source /tmp/env-openshift.sh
 fi
 
-getKubeChePod() {
-	kubectl get pods -l=app=che,component=che -o name -n ${CHE_NAMESPACE} --field-selector status.phase=Running
+getChePod() {
+  kubectl get pods -l=app=che,component=che -o name -n ${CHE_NAMESPACE} --field-selector status.phase=Running
 }
 
-getOcChePod() {
-  oc get pods -n che |  grep -P 'che-[0-9a-f]*-[0-9a-z]*'| cut -d' ' -f1
+getBranch() {
+  cat ${1}/.git/HEAD | cut -d'/' -f3
 }
 
 getCurrentBranch() {
-  cat ${CHEDIR}/.git/HEAD | cut -d'/' -f3
+  getBranch ${CHEDIR}
 }
 
 getCurrentCheopBranch() {
-  cat ${CHEOPERATORDIR}/.git/HEAD | cut -d'/' -f3
+  getBranch ${CHEOPERATORDIR}
 }
+

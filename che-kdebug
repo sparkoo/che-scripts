@@ -1,13 +1,11 @@
 #!/bin/sh
 
-set -x
-
-SCRIPT_DIR=$( dirname "${0}" )
-# shellcheck source=env.sh
-. "${SCRIPT_DIR}/env.sh"
+. $( dirname "${0}" )/env.sh
 
 PORT=${1:-8000}
+CHE_POD=$( getChePod )
 
-CHE_POD=$( getOcChePod )
-echo Forwarding to pod "${CHE_POD}"
-kc port-forward -n che "${CHE_POD}" "${PORT}":8000
+echo Forwarding to ${CHE_POD}
+
+set -x
+kc port-forward -n ${CHE_NAMESPACE} ${CHE_POD} ${PORT}:8000

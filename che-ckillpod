@@ -6,4 +6,4 @@ SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
 . "${SCRIPT_DIR}/env.sh"
 
-oc delete pod $( getOcChePod )
+oc delete $( getChePod )

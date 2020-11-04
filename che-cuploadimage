@@ -3,8 +3,6 @@
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-set -x
-
 TAG=$( getCurrentBranch )
 # shellcheck disable=SC2070
 if [ -n "${1}" ]; then

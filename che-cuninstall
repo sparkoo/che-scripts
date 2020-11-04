@@ -11,3 +11,4 @@ oc delete deployment che-operator -n ${CHE_NAMESPACE}
 sleep 5
 oc delete namespace ${CHE_NAMESPACE}
 oc delete namespace che-developer
+oc delete namespace che-user1
