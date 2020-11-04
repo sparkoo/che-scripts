@@ -2,11 +2,6 @@
 
 . "$( dirname "${0}" )/env.sh"
 
-SCRIPT_DIR=$( dirname "${0}" )
-USER=${OPENSHIFT_REGISTRY_USER}
-PASS=${OPENSHIFT_REGISTRY_PASS}
-CLUSTER_URL=${OPENSHIFT_CLUSTER_URL:-https://api.crc.testing:6443}
-
 set -x
-oc login --insecure-skip-tls-verify=true -u ${USER} -p ${PASS} ${CLUSTER_URL}
+oc login --insecure-skip-tls-verify=true -u ${OPENSHIFT_REGISTRY_USER} -p ${OPENSHIFT_REGISTRY_PASS} ${OPENSHIFT_CLUSTER_URL}
 set +x

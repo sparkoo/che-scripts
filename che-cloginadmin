@@ -2,11 +2,6 @@
 
 . "$( dirname "${0}" )/env.sh"
 
-SCRIPT_DIR=$( dirname "${0}" )
-USER=${OPENSHIFT_ADMIN_USER:-kubeadmin}
-PASS=${OPENSHIFT_ADMIN_PASS:-$( "${SCRIPT_DIR}"/che-cpass )}
-CLUSTER_URL=${OPENSHIFT_CLUSTER_URL:-https://api.crc.testing:6443}
-
 set -x
-oc login --insecure-skip-tls-verify=true -u ${USER} -p ${PASS} ${CLUSTER_URL}
+oc login --insecure-skip-tls-verify=true -u ${OPENSHIFT_ADMIN_USER} -p ${OPENSHIFT_ADMIN_PASS} ${OPENSHIFT_CLUSTER_URL}
 set +x

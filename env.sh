@@ -12,8 +12,9 @@ CHE_NAMESPACE=che
 
 PRIVATE_DOCKERREGISTRY=quay.io/mvala
 
+# openshift credentials for crc
 OPENSHIFT_ADMIN_USER=kubeadmin
-OPENSHIFT_ADMIN_PASS=
+OPENSHIFT_ADMIN_PASS=$( "${SCRIPT_DIR}"/che-cpass )
 
 OPENSHIFT_REGISTRY_USER=developer
 OPENSHIFT_REGISTRY_PASS=developer
@@ -21,6 +22,9 @@ OPENSHIFT_REGISTRY_PASS=developer
 OPENSHIFT_USER=developer
 OPENSHIFT_USER_PASS=developer
 
+OPENSHIFT_CLUSTER_URL=https://api.crc.testing:6443
+
+# override anything in this script
 if [ -f /tmp/env-openshift.sh ]; then
   source /tmp/env-openshift.sh
 fi
