@@ -3,12 +3,17 @@
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-TAG=$( getCurrentBranch )
+set -x
+
 # shellcheck disable=SC2070
 if [ -n "${1}" ]; then
-  IMAGE=${1}
+  LOCAL_IMAGE=${1}
+  TAG=$( echo ${LOCAL_IMAGE} | cut -d':' -f2 )
+  IMAGE_NAME=$( echo ${LOCAL_IMAGE} | cut -d':' -f1 | cut -d'/' -f3 )
 else
-  IMAGE=quay.io/mvala/che-server:${TAG}
+  TAG=$( getCurrentBranch )
+  IMAGE_NAME=che-server
+  LOCAL_IMAGE=${PRIVATE_DOCKERREGISTRY}/${IMAGE_NAME}:${TAG}
 fi
 
 . "$( dirname "${0}" )/che-cloginadmin"
@@ -18,13 +23,20 @@ oc create namespace ${CHE_NAMESPACE}
 set -e
 . "$( dirname "${0}" )/che-clogin"
 
+
 REGISTRY=`oc registry info --public`
 INTERNAL_REGISTRY=`oc registry info --internal=true`
-IMAGE_NAME=${CHE_NAMESPACE}/che-server
+
+REMOTE_IMAGE_NAME=${CHE_NAMESPACE}/${IMAGE_NAME}
 NEWTAG=$( date +%s )
-IMAGE=$IMAGE_NAME:$TAG
+IMAGE=${REMOTE_IMAGE_NAME}:${TAG}
+REMOTE_IMAGE=${REGISTRY}/${IMAGE}
 
 docker login --tls-verify=false -u $( oc whoami ) -p $( oc whoami -t ) $REGISTRY
-docker tag quay.io/mvala/che-server:${TAG} $REGISTRY/$IMAGE
-docker push --tls-verify=false $REGISTRY/$IMAGE
+docker tag ${LOCAL_IMAGE} ${REMOTE_IMAGE}
+docker push --tls-verify=false ${REMOTE_IMAGE}
 . "$( dirname "${0}" )/che-cloginadmin"
+
+echo
+echo "original image ${LOCAL_IMAGE}"
+echo "uploaded as ${REMOTE_IMAGE}"

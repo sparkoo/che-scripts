@@ -12,3 +12,4 @@ sleep 5
 oc delete namespace ${CHE_NAMESPACE}
 oc delete namespace che-developer
 oc delete namespace che-user1
+oc delete namespace user1-che

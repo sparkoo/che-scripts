@@ -11,6 +11,6 @@ helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
 --set cheImagePullPolicy=IfNotPresent \
 --set global.cheWorkspaceNamespace=che \
--f "${CHEDIR}"/deploy/kubernetes/helm/che/values/single-host-gateway.yaml \
+--set global.serverStrategy=single-host \
 -f "${CHEDIR}"/deploy/kubernetes/helm/che/values/tls.yaml \
 "${CHEDIR}"/deploy/kubernetes/helm/che
