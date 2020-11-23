@@ -40,3 +40,4 @@ docker push --tls-verify=false ${REMOTE_IMAGE}
 echo
 echo "original image ${LOCAL_IMAGE}"
 echo "uploaded as ${REMOTE_IMAGE}"
+echo "internal ${INTERNAL_REGISTRY}/${CHE_NAMESPACE}/${IMAGE_NAME}:${TAG}"
