@@ -9,8 +9,6 @@ spec:
     cheImagePullPolicy: {{CHE_IMAGE_PULL_POLICY}}
     cheLogLevel: 'DEBUG'
     cheDebug: 'true'
-    serverExposureStrategy: 'single-host'
-    singleHostWorkspaceExposureType: 'gateway'
     customCheProperties:
       CHE_LIMITS_USER_WORKSPACES_RUN_COUNT: '-1'
     workspaceNamespaceDefault: che-<username>
