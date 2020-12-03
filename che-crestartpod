@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -x
-
-. "$( dirname "${0}" )"/che-krestartpod

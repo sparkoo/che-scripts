@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -x
-
-oc scale deployment che --replicas=0
-sleep 5
-oc scale deployment che --replicas=1
