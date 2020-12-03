@@ -1,8 +1,0 @@
-#!/bin/sh
-
-URL=localhost:8081
-
-CHE_URL="http://${URL}"
-DEVFILE_URL=https://gist.githubusercontent.com/sparkoo/5b688c4cab8855719a8389fb03706daa/raw/2810de7bbf704bbd09a2ff5bbc21fdd2038345ea/minimalDevfile.yaml
-
-echo "${CHE_URL}"/f?url="${DEVFILE_URL}"
