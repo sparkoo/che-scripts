@@ -10,7 +10,7 @@ set -e
 DOMAIN="$( minikube ip ).nip.io" "${SCRIPT_DIR}"/che-kcert
 
 CHE_IMAGE_TAG=${CHE_IMAGE_TAG:-$( getCurrentBranch )}
-CHE_IMAGE=${CHE_IMAGE:-quay.io/mvala/che-server:${CHE_IMAGE_TAG}}
+CHE_IMAGE=${CHE_IMAGE:-${PRIVATE_DOCKERREGISTRY}/che-server:${CHE_IMAGE_TAG}}
 
 helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
 

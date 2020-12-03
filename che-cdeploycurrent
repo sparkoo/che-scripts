@@ -7,7 +7,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 
 INTERNAL_REGISTRY=`oc registry info --internal=true`
 CHE_IMAGE=${INTERNAL_REGISTRY}/${CHE_NAMESPACE}/che-server
-#CHE_IMAGE=quay.io/mvala/che-server
+#CHE_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server
 CHE_IMAGE_TAG=$( getCurrentBranch )
 
 sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g; s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml

@@ -8,7 +8,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 . "${SCRIPT_DIR}/env.sh"
 
 
-CHE_IMAGE=quay.io/mvala/che-server
+CHE_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server
 CHE_IMAGE_TAG=$( getCurrentBranch )
 
 . "${SCRIPT_DIR}/che-odeploy" ${CHE_IMAGE} ${CHE_IMAGE_TAG}

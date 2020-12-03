@@ -11,7 +11,7 @@ TAG=$( getCurrentBranch )
 if [ -n "${1}" ]; then
   IMAGE=${1}
 else
-  IMAGE=quay.io/mvala/che-server:${TAG}
+  IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server:${TAG}
 fi
 
 docker save "${IMAGE}" | ssh -i /home/mvala/.minishift/machines/minishift/id_rsa -o StrictHostKeyChecking=no docker@"$( minishift ip )" "docker load"

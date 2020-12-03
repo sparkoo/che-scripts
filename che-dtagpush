@@ -5,7 +5,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 . "${SCRIPT_DIR}/env.sh"
 
 TAG=${1}
-IMAGE=quay.io/mvala/che-server
+IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server
 SRC_IMAGE=${IMAGE}:custom
 DST_IMAGE=${IMAGE}:${TAG}
 

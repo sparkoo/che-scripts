@@ -9,7 +9,7 @@ TAG=$( getCurrentBranch )
 sh "${SCRIPT_DIR}"/che-buildq assembly
 
 pushd "${CHEDIR}"/dockerfiles/che || exit
-sh -x build.sh --organization:quay.io/mvala --prefix:che --name:server --tag:${TAG} --dockerfile:Dockerfile
+sh -x build.sh --organization:${PRIVATE_DOCKERREGISTRY} --prefix:che --name:server --tag:${TAG} --dockerfile:Dockerfile
 popd || exit
 
-echo "docker push quay.io/mvala/che-server:${TAG}"
+echo "docker push ${PRIVATE_DOCKERREGISTRY}/che-server:${TAG}"
