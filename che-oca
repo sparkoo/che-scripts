@@ -1,3 +1,0 @@
-#!/bin/sh
-
-cat ~/.minishift/machines/minishift_kubeconfig | grep certificate-authority-data | xargs | cut -d' ' -f 2 | base64 -d
