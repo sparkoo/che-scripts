@@ -10,8 +10,8 @@ IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
 pushd "${CHEOPERATORDIR}" || exit
 set -x
 docker build -t "${IMAGE}" .
-#docker push "${IMAGE}"
-sh "$( dirname "${0}" )/che-cuploadimage" "${IMAGE}"
+# docker push "${IMAGE}"
+# sh "$( dirname "${0}" )/che-cuploadimage" "${IMAGE}"
 echo "${IMAGE}"
 set +x
 popd
