@@ -9,7 +9,7 @@ CHEPLUGINREGISTRYDIR=/home/mvala/dev/che-plugin-registry
 CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
 CHEOPERATORDIR=/home/mvala/dev/che-operator
 
-CHE_NAMESPACE=che
+CHE_NAMESPACE=${CHE_NAMESPACE:-che}
 
 PRIVATE_DOCKERREGISTRY=quay.io/mvala
 
