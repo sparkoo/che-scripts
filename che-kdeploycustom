@@ -21,7 +21,7 @@ kubectl create namespace che
 helm upgrade --install che --namespace che \
 --set global.ingressDomain=$(minikube ip).nip.io \
 --set cheImage=${CHE_IMAGE} \
---set cheImagePullPolicy=IfNotPresent \
+--set cheImagePullPolicy=Never \
 --set global.cheWorkspaceNamespace=che \
 --set che.disableProbes=true \
 --set che.logLevel=DEBUG \
