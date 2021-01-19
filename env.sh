@@ -2,12 +2,14 @@
 
 set +x
 
-CHEDIR=/home/mvala/dev/che
-CHETHEIADIR=/home/mvala/dev/che-theia
-CHEDOCSDIR=/home/mvala/dev/che-docs
-CHEPLUGINREGISTRYDIR=/home/mvala/dev/che-plugin-registry
-CHEDEVFILEREGISTRYDIR=/home/mvala/dev/che-devfile-registry
-CHEOPERATORDIR=/home/mvala/dev/che-operator
+DEVDIR=/home/mvala/dev
+
+CHEDIR=${DEVDIR}/che
+CHETHEIADIR=${DEVDIR}/che-theia
+CHEDOCSDIR=${DEVDIR}/che-docs
+CHEPLUGINREGISTRYDIR=${DEVDIR}/che-plugin-registry
+CHEDEVFILEREGISTRYDIR=${DEVDIR}/che-devfile-registry
+CHEOPERATORDIR=${DEVDIR}/che-operator
 
 CHE_NAMESPACE=${CHE_NAMESPACE:-che}
 
