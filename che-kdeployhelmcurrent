@@ -7,6 +7,9 @@ CHE_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server:$( getCurrentBranch )
 
 set -x
 
+# generate certs when not already there
+kc get secret self-signed-certificate -n ${CHE_NAMESPACE} || . "$( dirname "${0}" )/che-kcert"
+
 kubectl create namespace ${CHE_NAMESPACE}
 
 helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
