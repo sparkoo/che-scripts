@@ -1,7 +1,9 @@
 #!/bin/sh
 
+. "$( dirname "${0}" )/env.sh"
+
 set -x
 
-kc scale deployment che --replicas=0
+kc scale deployment che --replicas=0 -n ${CHE_NAMESPACE}
 sleep 5
-kc scale deployment che --replicas=1
+kc scale deployment che --replicas=1 -n ${CHE_NAMESPACE}
