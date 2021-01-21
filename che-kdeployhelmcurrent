@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# shellcheck source=./env.sh
+. "$( dirname "${0}" )/env.sh"
+
+CHE_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server:$( getCurrentBranch )
+
+set -x
+
+kubectl create namespace ${CHE_NAMESPACE}
+
+helm dependencies update "${CHEDIR}"/deploy/kubernetes/helm/che
+
+helm upgrade --install che --namespace ${CHE_NAMESPACE} \
+--set global.ingressDomain=$(minikube ip).nip.io \
+--set cheImagePullPolicy=Never \
+--set cheImage=${CHE_IMAGE} \
+--set global.cheWorkspaceNamespace=che \
+-f "${CHEDIR}"/deploy/kubernetes/helm/che/values/tls.yaml \
+"${CHEDIR}"/deploy/kubernetes/helm/che
+
+. "$( dirname "${0}" )/che-kurl"
