@@ -19,6 +19,8 @@ helm upgrade --install che --namespace ${CHE_NAMESPACE} \
 --set cheImagePullPolicy=Never \
 --set cheImage=${CHE_IMAGE} \
 --set global.cheWorkspaceNamespace=che \
+--set che.disableProbes=true \
+--set che.logLevel=DEBUG \
 -f "${CHEDIR}"/deploy/kubernetes/helm/che/values/tls.yaml \
 "${CHEDIR}"/deploy/kubernetes/helm/che
 
