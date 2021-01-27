@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -x
+
+docker run -v `pwd`:/ws:z --workdir=/ws quay.io/jbangdev/jbang-action ${@}
