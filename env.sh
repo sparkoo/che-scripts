@@ -2,7 +2,7 @@
 
 set +x
 
-DEVDIR=/home/mvala/dev
+DEVDIR=${DEVDIR:-/home/mvala/dev}
 
 CHEDIR=${DEVDIR}/che
 CHETHEIADIR=${DEVDIR}/che-theia
@@ -13,7 +13,7 @@ CHEOPERATORDIR=${DEVDIR}/che-operator
 
 CHE_NAMESPACE=${CHE_NAMESPACE:-che}
 
-PRIVATE_DOCKERREGISTRY=quay.io/mvala
+PRIVATE_DOCKERREGISTRY=${PRIVATE_DOCKERREGISTRY:-quay.io/mvala}
 
 # openshift credentials for crc
 OPENSHIFT_ADMIN_USER=kubeadmin
