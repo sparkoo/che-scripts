@@ -14,4 +14,4 @@ MINIKUBE_IP=$( minikube ip )
 
 sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g; s%{{K8S_IP}}%${MINIKUBE_IP}%g; s%{{CHE_IMAGE_PULL_POLICY}}%IfNotPresent%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
-chectl server:deploy --platform=minikube --installer=operator --che-operator-cr-patch-yaml=/tmp/che_cr.yaml
+chectl server:deploy --platform=minikube --installer=operator --che-operator-cr-patch-yaml=/tmp/che_cr.yaml --chenamespace=${CHE_NAMESPACE}
