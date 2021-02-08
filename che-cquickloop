@@ -8,8 +8,8 @@ SCRIPT_DIR=$( dirname "${0}" )
 
 sh "${SCRIPT_DIR}"/che-buildq "${*}"
 
-kc scale deployment che --replicas=0 -n ${CHE_NAMESPACE}
+kubectl scale deployment che --replicas=0 -n ${CHE_NAMESPACE}
 sh "${SCRIPT_DIR}"/che-crebuilddocker
-kc scale deployment che --replicas=1 -n ${CHE_NAMESPACE}
+kubectl scale deployment che --replicas=1 -n ${CHE_NAMESPACE}
 
 #sh "${SCRIPT_DIR}"/che-ckillpod

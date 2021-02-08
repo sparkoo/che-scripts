@@ -8,4 +8,4 @@ CHE_POD=$( getChePod )
 echo Forwarding to ${CHE_POD}
 
 set -x
-kc port-forward -n ${CHE_NAMESPACE} ${CHE_POD} ${PORT}:8000
+kubectl port-forward -n ${CHE_NAMESPACE} ${CHE_POD} ${PORT}:8000

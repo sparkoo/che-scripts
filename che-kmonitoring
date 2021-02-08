@@ -6,7 +6,7 @@ SCRIPT_DIR=$( dirname "${0}" )
 
 NAMESPACE=che
 
-kc apply -f "${CHEDIR}"/deploy/openshift/templates/monitoring/grafana-dashboards.yaml -n "${NAMESPACE}"
+kubectl apply -f "${CHEDIR}"/deploy/openshift/templates/monitoring/grafana-dashboards.yaml -n "${NAMESPACE}"
 sed "s/{k8sip}/$(minikube ip)/g" "${SCRIPT_DIR}"/monitoring/prometheus_k8s.yaml | kubectl apply -n "${NAMESPACE}" -f -
 sed "s/{k8sip}/$(minikube ip)/g" "${SCRIPT_DIR}"/monitoring/grafana_k8s.yaml | kubectl apply -n "${NAMESPACE}" -f -
 
