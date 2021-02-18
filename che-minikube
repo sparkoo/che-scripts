@@ -15,13 +15,5 @@ set -x
 
 minikube start --memory "${MEMORY}"gb --disk-size 40g --driver='kvm2'
 
-# fix internal networking issue
-#minikube ssh -- sudo ip link set docker0 promisc on
-
-#kubectl create namespace che
-#kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
-#kubectl create serviceaccount tiller --namespace kube-system
-#kubectl apply -f "${CHEDIR}"/deploy/kubernetes/helm/che/tiller-rbac.yaml
-#helm init --service-account tiller --wait
 minikube addons enable ingress
 minikube ip
