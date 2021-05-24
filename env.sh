@@ -4,7 +4,7 @@ set +x
 
 DEVDIR=${DEVDIR:-/home/mvala/dev}
 
-CHEDIR=${DEVDIR}/che
+CHEDIR=${DEVDIR}/che-server
 CHETHEIADIR=${DEVDIR}/che-theia
 CHEDOCSDIR=${DEVDIR}/che-docs
 CHEPLUGINREGISTRYDIR=${DEVDIR}/che-plugin-registry
