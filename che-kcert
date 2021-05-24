@@ -3,6 +3,10 @@
 set -x
 set -e
 
+SCRIPT_DIR=$( dirname "${0}" )
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
 DOMAIN="${DOMAIN:-*.$( minikube ip ).nip.io}"
 CERT_DIR="/tmp/cert-${DOMAIN/\*/_}"
 
@@ -19,8 +23,8 @@ else
   certgen ${DOMAIN}
 fi
 cp rootCA.crt ca.crt
-kubectl create namespace che
-kubectl create secret tls che-tls --key=domain.key --cert=domain.crt -n che
-kubectl create secret generic self-signed-certificate --from-file=ca.crt -n che
+kubectl create namespace che || true
+kubectl create secret tls che-tls --key=domain.key --cert=domain.crt -n ${CHE_NAMESPACE}
+kubectl create secret generic self-signed-certificate --from-file=ca.crt -n ${CHE_NAMESPACE}
 
 popd
