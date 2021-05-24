@@ -1,12 +1,9 @@
 #!/usr/bin/env sh
 
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
 
-if [ -z "${1}" ]; then
-  echo "needs namespace argument to switch to - \`kc-namespace <namespace>\`"
-  exit 1
-fi
-
-NAMESPACE=${1}
+NAMESPACE=${1:-$CHE_NAMESPACE}
 
 CURRENT_CONTEXT=$(kubectl config current-context)
 kubectl config set-context "${CURRENT_CONTEXT}" --namespace="${NAMESPACE}"
