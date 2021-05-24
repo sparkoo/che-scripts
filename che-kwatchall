@@ -3,4 +3,6 @@
 # shellcheck source=env.sh
 . "$( dirname "${0}" )/env.sh"
 
-watch kubectl get all -n ${CHE_NAMESPACE}
+NS=${1:-$CHE_NAMESPACE}
+
+watch kubectl get all -n ${NS}
