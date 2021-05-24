@@ -2,6 +2,8 @@
 
 . "$( dirname "${0}" )/env.sh"
 
-set -x
-oc login --insecure-skip-tls-verify=true -u ${OPENSHIFT_REGISTRY_USER} -p ${OPENSHIFT_REGISTRY_PASS} ${OPENSHIFT_CLUSTER_URL}
+OS_USER=${OS_USER:-$OPENSHIFT_REGISTRY_USER}
+OS_PASS=${OS_PASS:-$OPENSHIFT_REGISTRY_PASS}
+
 set +x
+oc login --insecure-skip-tls-verify=true -u ${OS_USER} -p ${OS_PASS} ${OPENSHIFT_CLUSTER_URL}
