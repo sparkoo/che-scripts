@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
+
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
+PG_POD=$( kubectl get pods -l=app=che,component=postgres -o name -n ${CHE_NAMESPACE} --field-selector status.phase=Running )
+set -x
+kubectl port-forward -n ${CHE_NAMESPACE} ${PG_POD} 5432:5432
