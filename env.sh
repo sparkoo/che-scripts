@@ -17,7 +17,7 @@ PRIVATE_DOCKERREGISTRY=${PRIVATE_DOCKERREGISTRY:-quay.io/mvala}
 
 # openshift credentials for crc
 OPENSHIFT_ADMIN_USER=kubeadmin
-OPENSHIFT_ADMIN_PASS=$( $( dirname "${0}" )/che-cpass )
+OPENSHIFT_ADMIN_PASS=
 
 OPENSHIFT_REGISTRY_USER=developer
 OPENSHIFT_REGISTRY_PASS=developer
