@@ -1,9 +1,5 @@
 #!/bin/bash
 
 . "$( dirname "${0}" )/env.sh"
-if [ -z ${OPENSHIFT_ADMIN_PASS} ]; then
-  cp ~/.crc/cache/*/kubeconfig ~/.kube/config
-else
-  set +x
-  oc login --insecure-skip-tls-verify=true -u ${OPENSHIFT_ADMIN_USER} -p ${OPENSHIFT_ADMIN_PASS} ${OPENSHIFT_CLUSTER_URL}
-fi
+
+oc login --insecure-skip-tls-verify=true -u ${OPENSHIFT_ADMIN_USER} -p ${OPENSHIFT_ADMIN_PASS} ${OPENSHIFT_CLUSTER_URL}
