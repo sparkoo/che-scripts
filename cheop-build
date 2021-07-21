@@ -9,7 +9,9 @@ IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
 
 pushd "${CHEOPERATORDIR}" || exit
 set -x
-docker build -t "${IMAGE}" .
+make chectl-templ TARGET=/tmp/cheop-templates/che-operator
+IMG=${IMAGE} make docker-build
+docker push ${IMAGE}
 # docker push "${IMAGE}"
 # sh "$( dirname "${0}" )/che-cuploadimage" "${IMAGE}"
 echo "${IMAGE}"
