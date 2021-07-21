@@ -1,16 +1,10 @@
-apiVersion: org.eclipse.che/v1
-kind: CheCluster
-metadata:
-  name: eclipse-che
 spec:
+  auth:
+    nativeUserMode: true
   server:
-    cheImage: '{{CHE_IMAGE}}'
-    cheImageTag: '{{CHE_IMAGE_TAG}}'
     cheImagePullPolicy: {{CHE_IMAGE_PULL_POLICY}}
     cheLogLevel: 'DEBUG'
     cheDebug: 'true'
     customCheProperties:
       CHE_LIMITS_USER_WORKSPACES_RUN_COUNT: '-1'
-    workspaceNamespaceDefault: che-<username>
-  metrics:
-    enable: false
+    dashboardImage: quay.io/mvala/che-dashboard:next

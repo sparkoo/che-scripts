@@ -8,9 +8,17 @@ SCRIPT_DIR=$( dirname "${0}" )
 . "${SCRIPT_DIR}/env.sh"
 
 
-CHE_IMAGE=${1:-quay.io/eclipse/che-server}
-CHE_IMAGE_TAG=${2:-nightly}
+CHE_IMAGE=${1}
+CHE_IMAGE_TAG=${2}
 
-sed "s%{{CHE_IMAGE}}%${CHE_IMAGE}%g; s%{{CHE_IMAGE_TAG}}%${CHE_IMAGE_TAG}%g; s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
+sed "s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
-chectl server:deploy --platform=openshift --workspace-engine=dev-workspace --che-operator-cr-patch-yaml=/tmp/che_cr.yaml --chenamespace=${CHE_NAMESPACE}
+EXTRA_ARGS=""
+if [ -n "${CHE_IMAGE}" -a -n "${CHE_IMAGE_TAG}" ]; then
+    EXTRA_ARGS="--cheimage=${CHE_IMAGE}:${CHE_IMAGE_TAG}"
+fi
+
+set -x
+
+#chectl server:deploy --platform=openshift --workspace-engine=dev-workspace --che-operator-cr-patch-yaml=/tmp/che_cr.yaml --chenamespace=${CHE_NAMESPACE}
+chectl server:deploy --platform=openshift --installer=operator --workspace-engine=dev-workspace --chenamespace=${CHE_NAMESPACE} --che-operator-cr-patch-yaml=/tmp/che_cr.yaml ${EXTRA_ARGS}
