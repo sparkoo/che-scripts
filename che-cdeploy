@@ -15,8 +15,17 @@ sed "s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_tem
 
 EXTRA_ARGS=""
 if [ -n "${CHE_IMAGE}" -a -n "${CHE_IMAGE_TAG}" ]; then
-    EXTRA_ARGS="--cheimage=${CHE_IMAGE}:${CHE_IMAGE_TAG}"
+    EXTRA_ARGS="${EXTRA_ARGS} --cheimage=${CHE_IMAGE}:${CHE_IMAGE_TAG}"
 fi
+
+if [ -n "${CHEOP_IMAGE}" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --che-operator-image=${CHEOP_IMAGE}"
+fi
+
+if [ -n "${CHEOP_TEMPLATES}" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --templates=${CHEOP_TEMPLATES}"
+fi
+
 
 set -x
 
