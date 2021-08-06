@@ -1,4 +1,6 @@
 #!/bin/bash
 
-PASS=$( cat ~/.crc/machines/crc/kubeadmin-password )
-echo "${PASS}"
+if [ -f ~/.crc/machines/crc/kubeadmin-password ]; then
+  PASS=$( cat ~/.crc/machines/crc/kubeadmin-password )
+  echo "${PASS}"
+fi
