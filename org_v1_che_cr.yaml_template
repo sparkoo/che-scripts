@@ -1,6 +1,4 @@
 spec:
-  auth:
-    nativeUserMode: true
   server:
     cheImagePullPolicy: {{CHE_IMAGE_PULL_POLICY}}
     cheLogLevel: 'DEBUG'
