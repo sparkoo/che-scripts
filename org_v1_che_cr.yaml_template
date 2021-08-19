@@ -5,4 +5,3 @@ spec:
     cheDebug: 'true'
     customCheProperties:
       CHE_LIMITS_USER_WORKSPACES_RUN_COUNT: '-1'
-    dashboardImage: quay.io/mvala/che-dashboard:next
