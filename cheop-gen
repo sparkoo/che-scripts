@@ -1,7 +1,18 @@
 #!/bin/bash
 
 set -e
+
+. "$( dirname "${0}" )/env.sh"
+
+IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
+
+pushd "${CHEOPERATORDIR}" || exit
 set -x
 
-operator-sdk generate k8s
-operator-sdk generate openapi
+make generate
+make manifests
+make update-resources -s
+make chectl-templ TARGET=/tmp/cheop-templates/che-operator
+
+set +x
+popd
