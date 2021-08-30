@@ -1,8 +1,3 @@
 #!/bin/bash
 
-oc create namespace che
 oc get secret router-ca -n openshift-ingress-operator -o jsonpath="{.data.tls\.crt}" | base64 -d > /tmp/ca.crt
-
-pushd /tmp
-oc create secret generic self-signed-certificate --from-file=ca.crt -n=che
-popd

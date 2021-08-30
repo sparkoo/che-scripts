@@ -21,9 +21,6 @@ set +e
 
 
 . "$( dirname "${0}" )"/che-clogin
-oc create namespace che
 . "$( dirname "${0}" )"/che-cregistryrole
-. "$( dirname "${0}" )"/che-ctls
-
 
 echo "import '/tmp/ca.crt' into your browser"
