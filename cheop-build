@@ -10,9 +10,13 @@ IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
 pushd "${CHEOPERATORDIR}" || exit
 set -x
 make chectl-templ TARGET=/tmp/cheop-templates/che-operator
+
 IMG=${IMAGE} make docker-build
+
+kubectl scale deployment che-operator --replicas=0 -n ${CHE_NAMESPACE} || true
 docker push ${IMAGE}
-# docker push "${IMAGE}"
+kubectl scale deployment che-operator --replicas=1 -n ${CHE_NAMESPACE} || true
+
 # sh "$( dirname "${0}" )/che-cuploadimage" "${IMAGE}"
 echo "${IMAGE}"
 set +x
