@@ -36,6 +36,10 @@ getChePod() {
   kubectl get pods -l=app=che,component=che -o name -n ${CHE_NAMESPACE} --field-selector status.phase=Running
 }
 
+getCheOpPod() {
+  kubectl get pods -l=app=che-operator -o name -n ${CHE_NAMESPACE} --field-selector status.phase=Running
+}
+
 getBranch() {
   cat ${1}/.git/HEAD | cut -d'/' -f3
 }

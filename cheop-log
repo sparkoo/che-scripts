@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
+kubectl logs -f $( getCheOpPod ) -n ${CHE_NAMESPACE}
