@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# shellcheck source=env.sh
+. "$( dirname "${0}" )/env.sh"
+
 set -e
 
-URL=$( oc get routes | grep che- )
+URL=$( oc get routes -n ${CHE_NAMESPACE} | grep che- )
 # shellcheck disable=SC2086
 URL=$( echo ${URL} | cut -d' ' -f2 )
 
-echo "http://${URL}"
-echo "http://${URL}/swagger"
+echo "https://${URL}"
+echo "https://${URL}/swagger"
