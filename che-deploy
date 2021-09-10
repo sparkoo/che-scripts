@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -x
+
+SCRIPT_DIR=$( dirname "${0}" )
+
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
+PLATFORM=${1}
+if [ -z "${PLATFORM}" ]; then
+    echo "need to set platform './che-deploy <platform>'"
+    exit 1
+fi
+
+sed "s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
+
+EXTRA_ARGS=""
+if [ -n "${CHE_IMAGE}" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --cheimage=${CHE_IMAGE}"
+fi
+
+if [ -n "${CHEOP_IMAGE}" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --che-operator-image=${CHEOP_IMAGE}"
+fi
+
+if [ -n "${CHEOP_TEMPLATES}" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --templates=${CHEOP_TEMPLATES}"
+fi
+
+
+set -x
+
+#chectl server:deploy --platform=openshift --workspace-engine=dev-workspace --che-operator-cr-patch-yaml=/tmp/che_cr.yaml --chenamespace=${CHE_NAMESPACE}
+chectl server:deploy --platform=openshift --installer=operator --workspace-engine=dev-workspace --chenamespace=${CHE_NAMESPACE} --che-operator-cr-patch-yaml=/tmp/che_cr.yaml ${EXTRA_ARGS}
