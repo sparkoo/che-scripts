@@ -9,4 +9,4 @@ SCRIPT_DIR=$( dirname "${0}" )
 
 CHEOP_IMAGE=quay.io/mvala/che-operator:gh20190-secureWsServicesTraefik
 
-. "${SCRIPT_DIR}/che-deploy.sh" openshift
+. "${SCRIPT_DIR}/che-deploy" openshift
