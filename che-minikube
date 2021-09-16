@@ -6,14 +6,14 @@ set -e
 . "$( dirname "${0}" )/env.sh"
 
 if [ -z "${1}" ]; then
-  MEMORY=8
+  MEMORY=10
 else
   MEMORY=${1}
 fi
 
 set -x
 
-minikube start --memory "${MEMORY}"gb --disk-size 40g --driver='kvm2'
+minikube start --memory "${MEMORY}"gb --disk-size 40g --driver='kvm2' --kubernetes-version='1.21.4' --cpus='4'
 
 minikube addons enable ingress
 minikube ip
