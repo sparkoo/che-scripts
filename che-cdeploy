@@ -7,6 +7,6 @@ SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
 . "${SCRIPT_DIR}/env.sh"
 
-CHEOP_IMAGE=quay.io/mvala/che-operator:$( getCurrentCheopBranch )
+CHEOP_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
 
 . "${SCRIPT_DIR}/che-deploy" openshift

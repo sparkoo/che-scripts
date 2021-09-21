@@ -2,7 +2,7 @@
 
 set +x
 
-DEVDIR=${DEVDIR:-/home/mvala/dev}
+DEVDIR=${DEVDIR:-${HOME}/dev}
 
 CHEDIR=${DEVDIR}/che-server
 CHETHEIADIR=${DEVDIR}/che-theia
