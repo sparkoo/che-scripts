@@ -6,6 +6,7 @@ set -e
 . "$( dirname "${0}" )/env.sh"
 
 IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
+find . -not -path "./vendor/*" -name "*.go" -exec goimports -w {} \;
 
 pushd "${CHEOPERATORDIR}" || exit
 set -x
