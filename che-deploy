@@ -24,11 +24,15 @@ if [ -n "${CHEOP_IMAGE}" ]; then
     EXTRA_ARGS="${EXTRA_ARGS} --che-operator-image=${CHEOP_IMAGE}"
 fi
 
-if [ -n "${CHEOP_TEMPLATES}" ]; then
-    EXTRA_ARGS="${EXTRA_ARGS} --templates=${CHEOP_TEMPLATES}"
+if [ "${CHEOP_TEMPLATES}" == "true" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --templates=/tmp/cheop-templates"
+fi
+
+if [ "${DEVWORKSPACE_ENGINE}" == "true" ]; then
+    EXTRA_ARGS="${EXTRA_ARGS} --workspace-engine=dev-workspace"
 fi
 
 
 set -x
 
-chectl server:deploy --platform=${PLATFORM} --installer=operator --workspace-engine=dev-workspace --chenamespace=${CHE_NAMESPACE} --che-operator-cr-patch-yaml=/tmp/che_cr.yaml ${EXTRA_ARGS}
+chectl server:deploy --platform=${PLATFORM} --installer=operator --chenamespace=${CHE_NAMESPACE} --che-operator-cr-patch-yaml=/tmp/che_cr.yaml ${EXTRA_ARGS}
