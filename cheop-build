@@ -10,6 +10,7 @@ find . -not -path "./vendor/*" -name "*.go" -exec goimports -w {} \;
 
 pushd "${CHEOPERATORDIR}" || exit
 set -x
+make fmt
 make chectl-templ TARGET=/tmp/cheop-templates/che-operator
 
 IMG=${IMAGE} make docker-build
