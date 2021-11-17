@@ -12,7 +12,7 @@ else
 fi
 
 if [ $( uname ) == "Darwin" ]; then
-  MINIKUBE_DRIVER="docker"
+  MINIKUBE_DRIVER="hyperkit"
 else
   MINIKUBE_DRIVER="kvm2"
 fi
