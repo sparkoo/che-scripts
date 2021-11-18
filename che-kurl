@@ -1,11 +1,15 @@
 #!/bin/bash
 
+SCRIPT_DIR=$( dirname "${0}" )
+# shellcheck source=env.sh
+. "${SCRIPT_DIR}/env.sh"
+
 set -e
 set +x
 
-URL=$( kubectl get ingresses -n che | grep ^che )
+URL=$( kubectl get ingress che -n ${CHE_NAMESPACE} | grep ^che )
 # shellcheck disable=SC2086
 URL=$( echo ${URL} | cut -d' ' -f3 )
 
-echo "http://${URL}"
-echo "http://${URL}/swagger"
+echo "https://${URL}"
+echo "https://${URL}/swagger"
