@@ -1,7 +1,11 @@
 spec:
+  auth:
+    nativeUserMode: true
+    identityProviderURL: http://dex.dex:5556
   server:
+    dashboardImage: quay.io/mvala/che-dashboard:kubeNativeAuth
     cheImagePullPolicy: {{CHE_IMAGE_PULL_POLICY}}
-    cheLogLevel: 'DEBUG'
     cheDebug: 'true'
+    cheHost: 'che-eclipse-che.{{MINIKUBE_IP}}.nip.io'
     customCheProperties:
-      CHE_LIMITS_USER_WORKSPACES_RUN_COUNT: '-1'
+      CHE_KEYCLOAK_AUTH__INTERNAL__SERVER__URL: 'http://dex.dex:5556'
