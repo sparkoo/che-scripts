@@ -13,7 +13,8 @@ if [ -z "${PLATFORM}" ]; then
     exit 1
 fi
 
-sed "s%{{CHE_IMAGE_PULL_POLICY}}%Always%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
+CHE_IMAGE_PULL_POLICY=${CHE_IMAGE_PULL_POLICY:-Always}
+sed "s%{{CHE_IMAGE_PULL_POLICY}}%${CHE_IMAGE_PULL_POLICY}%g; s%{{MINIKUBE_IP}}%${MINIKUBE_IP}%g" "${SCRIPT_DIR}/org_v1_che_cr.yaml_template" > /tmp/che_cr.yaml
 
 EXTRA_ARGS=""
 if [ -n "${CHE_IMAGE}" ]; then

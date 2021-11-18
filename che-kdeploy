@@ -7,6 +7,12 @@ SCRIPT_DIR=$( dirname "${0}" )
 # shellcheck source=env.sh
 . "${SCRIPT_DIR}/env.sh"
 
-CHEOP_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:gh20190-secureWsServicesTraefik
+MINIKUBE_IP=$( minikube ip )
+
+CHEOP_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-operator:$( getCurrentCheopBranch )
+# CHEOP_TEMPLATES=true
+CHE_IMAGE_PULL_POLICY=IfNotPresent
+CHE_IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server:$( getCurrentBranch )
+DEVWORKSPACE_ENGINE=true
 
 . "${SCRIPT_DIR}/che-deploy" minikube
