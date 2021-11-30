@@ -13,4 +13,4 @@ else
   IMAGE=${PRIVATE_DOCKERREGISTRY}/che-server:${TAG}
 fi
 
-docker save "${IMAGE}" | ssh -i "$( minikube ssh-key )" -o StrictHostKeyChecking=no docker@"$( minikube ip )" "docker load"
+minikube image load "${IMAGE}"
