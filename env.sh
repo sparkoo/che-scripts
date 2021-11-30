@@ -7,6 +7,7 @@ DEVDIR=${DEVDIR:-${HOME}/dev}
 CHEDIR=${DEVDIR}/che-server
 CHETHEIADIR=${DEVDIR}/che-theia
 CHEDOCSDIR=${DEVDIR}/che-docs
+CHECTLDIR=${DEVDIR}/chectl
 CHEPLUGINREGISTRYDIR=${DEVDIR}/che-plugin-registry
 CHEDEVFILEREGISTRYDIR=${DEVDIR}/che-devfile-registry
 CHEOPERATORDIR=${DEVDIR}/che-operator
