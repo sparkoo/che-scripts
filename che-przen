@@ -1,3 +1,3 @@
 #!/bin/bash
 
-przen -owner eclipse -repo che -spammer che-bot
+przen -owner eclipse-che -repo che-server -spammer che-bot
